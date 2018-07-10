@@ -1,0 +1,139 @@
+/* pages/detail/detail.wxss */
+.detail1{
+  padding: 4px;
+  box-sizing: border-box;
+}
+.detail1 .detail-content{
+  box-sizing: border-box;
+}
+.detail1 .detail-content .content-top{
+  border-bottom: 1px solid #eeeeee;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.detail1 .detail-content .content-top .detailImg{
+  width: 44px;
+  border-radius: 50%;
+  height: 44px;
+  box-sizing: border-box; 
+  margin-right: 5px;
+}
+.detail1 .detail-content .content-top .detailImg image{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.detail1 .detail-content .content-top .detailMilden{
+  box-sizing: border-box;
+}
+.detail1 .detail-content .content-top .detailMilden .detail-name{
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  box-sizing: border-box;
+}
+.detail1 .detail-content .content-top .detailMilden .detail-name text{
+  font-size: 10px;
+  color: #33333f;
+}
+.detail1 .detail-content .content-top .detailMilden .detail-name .detail-type-item{
+  display: inline-block;
+  margin-left: 10px;
+}
+.detail1 .detail-content .content-top .detailMilden .detail-name .detail-type-item .detail-type-item-font{
+  font-size: 14px;
+  color: #80bd01;
+}
+.detail1 .detail-content .content-top .detailMilden .detail-post-time{
+  color: #888888;
+  font-size: 12px;
+}
+.detail1 .detail-content .content-top .detail-collect-item{
+  box-sizing: border-box;
+  padding: 6px 8px;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #80bd01;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.detail1 .detail-content .detail-Bottom{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-sizing: border-box;
+}
+.detail1 .detail-content .detail-Bottom .detail-post-title{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.detail1 .detail-content .detail-Bottom .detail-post-title .detail-posts-tag{
+  padding: 2px 6px;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #ff0000;
+  color: #ff0000;
+  margin-right: 10px;
+}
+.detail-post-criticism{
+  /* padding: 5px; */
+  box-sizing: border-box;
+}
+.detail-post-criticism .detail-post-criticism-top{
+  padding: 10px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eeeeee;
+}
+.detail-post-criticism  .detail-criticism-item{
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+}
+.detail-post-criticism  .detail-criticism-item .detail-post-zan-num{
+  font-size: 12px;
+  color: #888888;
+  margin-left: 5px;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+.detail-post-criticism  .detail-criticism-item image{
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+ .detail-post-criticism .detail-criticism-content{
+  padding-bottom: 12px;
+  padding-top: 10px;
+  font-size: 14px;
+  color: #33333f;
+}
+/* 内容样式 */
+.wxParse-p{
+  color: #6c6c6c;
+  font-size: 15px;
+}
+.wxParse-pre{
+  white-space: normal;
+}
+.WxEmojiView{
+  font-size: 14px;
+}
+/* 没有内容的样式 */
+.detail-post-comment-null{
+  text-align: center;
+}
+.detail-post-comment-null .imgnull{
+  margin:  0 auto;
+  display: block;
+}
+.detail-post-comment-null .textnull{
+  text-align: center;
+  display: block;
+  font-size: 14px;
+  color: #6c6c6c;
+}

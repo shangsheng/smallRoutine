@@ -1,0 +1,54 @@
+/* pages/login/lgon.wxss */
+page{
+  height: 100%;
+}
+.pages-from{
+  background-color: #444;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 100%;
+}
+.from-logo{
+  padding-top: 60px;
+  text-align: center;
+}
+.from-logo image{
+  width: 210px;
+  height: 46px;
+  margin: 0 auto;
+}
+.section{
+  width: 214px;
+  height: 46px;
+  margin: 20px auto;
+  background-color: #6c6c6c;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+.section input{
+  color: #ffffff;
+  font-size: 16px;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+.section input::-webkit-input-placeholder{
+  color: #ffffff;
+}
+.section input:-moz-placeholder{
+  color: #ffffff;
+}
+.section input:-ms-input-placeholder{
+  color: #ffffff;
+}
+.btn-area{
+  width: 214px;
+  margin: 0 auto;
+  margin-bottom:20px;
+}
+.btn-area button{
+  background-color: #444;
+  border:1px solid #1aad19;
+  color: #1aad19;
+}

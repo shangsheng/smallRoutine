@@ -1,0 +1,8 @@
+<!--pages/topics/topics.wxml-->
+<import src="../common/header.wxml"/>
+<import src="../common/list.wxml"/>
+
+<view class="page topics">
+  <template is="header" data="{{ navList, activeIndex }}"/>
+  <template is="list" data="{{ postsList, hidden }}"/>
+</view>

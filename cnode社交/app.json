@@ -1,0 +1,36 @@
+{
+  "pages":[
+    "pages/topics/topics",
+    "pages/detail/detail",
+    "pages/login/lgon",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#444444",
+    "navigationBarTitleText": "CNODE 社区",
+    "navigationBarTextStyle":"white",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar":{
+    "color": "#444444",
+    "selectedColor": "#80bd01",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list":[
+      {
+        "pagePath": "pages/topics/topics",
+        "text": "首页",
+        "iconPath": "images/bar/CNode.png",
+        "selectedIconPath": "images/bar/CNodeHL.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的",
+        "iconPath": "images/bar/ME.png",
+        "selectedIconPath": "images/bar/MEHL.png"
+      }
+    ]
+  }
+}

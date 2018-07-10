@@ -1,0 +1,9 @@
+<template name="header">
+  <view class='header'>
+  <view class='header-ul'>
+    <view class='header-li' wx:for="{{navList}}" wx:key="">
+      <view class='header-a {{index == activeIndex ? "header-active" : "" }}' data-index='{{index}}' id='{{item.id}}' hover-class='navigator-hover' bindtap='onTapTag'>{{item.text}}</view>
+    </view>
+  </view>
+</view>
+</template>
