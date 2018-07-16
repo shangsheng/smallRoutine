@@ -1,0 +1,51 @@
+<!--index.wxml-->
+<import src="../../comment/list.wxml" />
+<view class="container">
+ <swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class='banner'>
+  <block wx:for="{{imgUrls}}">
+    <swiper-item class="banner-item" data-id= "{{item.encodeId}}">
+      <image src="{{item.pic}}" class="slide-image" width="355" height="150"/>
+    </swiper-item>
+  </block>
+</swiper>
+<!-- 每日推荐，歌单，排行榜 -->
+<view class='rsp'>
+  <view class='rsp-list'>
+    <navigator url="../recommend/index">
+      <text>每日推荐</text>
+    </navigator>
+  </view>
+  <view class='rsp-list'>
+    <navigator url="../song/index">
+      <text>歌单</text>
+    </navigator>
+  </view>
+  <view class='rsp-list'>
+    <navigator url="../ranking/index">
+      <text>排行榜</text>
+    </navigator>
+  </view>
+</view>
+<view class='recommend index'>
+  <view class='titles'><text>推荐歌单 ></text></view>
+  <view class='index-item'>
+    <template is="recommend" data="{{recommendIndex}}"/>
+  </view>
+</view>
+<view class='newSong index'>
+  <view class='titles'><text>推荐音乐 ></text></view>
+  <view class='index-item'>
+    <template is="newSong" data="{{newSongIndex}}"/>
+  </view>
+</view>
+<view class='djprogram index'>
+  <view class='titles'><text>主播电台 ></text></view>
+  <view class='index-item'>
+    <template is="djprogram" data="{{djprogramIndex}}"/>
+  </view>
+</view>
+</view>
+<loading class="loading" hidden="{{hidden}}">
+  <text class="loading-font">加载中...</text>
+</loading>

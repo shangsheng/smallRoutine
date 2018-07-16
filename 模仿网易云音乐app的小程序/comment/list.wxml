@@ -1,0 +1,43 @@
+<template name="recommend">
+  <view class='index-list-item clearfix'>
+    <block wx:for="{{recommendIndex}}" wx:key="">
+      <view class='index-list' data-listId="{{item.id}}">
+        <navigator url='/pages/playlist/detail?id={{item.id}}'>
+          <image src="{{item.picUrl}}" class='list-item-img'></image>
+          <view class='earCup'><image src='../../images/p0.png'></image><text>{{item.trackCount}}万</text></view>
+          <view class='index-abstract'>{{item.name}}</view>
+        </navigator>
+      </view>
+    </block>
+  </view>
+ </template>
+ <template name="newSong">
+  <view class='index-list-item clearfix'>
+    <block wx:for="{{newSongIndex}}" wx:key="">
+      <view class='index-list' data-listId="{{item.album.artists[0].id}}">
+        <navigator url="/pages/playlist/detail?id={{item.albumartists[0].id}}">
+          <image src="{{item.album.picUrl}}" class='list-item-img'></image>
+          <view class='index-abstract'>
+            <text class='index-name'>{{item.album.name}}</text>
+            <text class='index-artists'>{{item.album.artists[0].name}}</text>
+          </view>
+        </navigator>
+      </view>
+    </block>
+  </view>
+ </template>
+  <template name="djprogram">
+  <view class='index-list-item clearfix'>
+    <block wx:for="{{djprogramIndex}}" wx:key="">
+      <view class='index-list' data-listId="{{item.id}}">
+        <navigator url='/pages/playlist/detail?id={{item.id}}'>
+          <view class='djpogram-index-title' hidden="{{item.canDislike}}"><text>热门推荐</text></view>
+          <image src="{{item.picUrl}}" class='list-item-img'></image>
+          <view class='index-abstract'>
+            <text class='index-artists'>{{item.name}}</text>
+          </view>
+        </navigator>
+      </view>
+    </block>
+  </view>
+ </template>
