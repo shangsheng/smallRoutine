@@ -1,0 +1,54 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/fm/index",
+    "pages/home/index",
+    "pages/search/index",
+    "pages/logs/logs",
+    "pages/recommend/index",
+    "pages/song/index",
+    "pages/ranking/index",
+    "pages/playlist/detail"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#BB2c08",
+    "navigationBarTitleText": "Music",
+    "navigationBarTextStyle":"white",
+    "backgroundColor": "#fbfbfb"
+  },
+  "tabBar": {
+    "color":"#aaa",
+    "selectedColor": "#fff",
+    "borderStyle": "#333",
+    "backgroundColor": "#212121",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "发现音乐",
+      "iconPath": "images/cm2_btm_icn_discovery.png",
+      "selectedIconPath": "images/cm2_btm_icn_discovery_prs.png"
+    },{
+      "pagePath":"pages/fm/index",
+      "text":"私人Fm",
+      "iconPath":"images/cm2_btm_icn_radio.png",
+      "selectedIconPath":"images/cm2_btm_icn_radio_prs.png"
+    },{
+      "pagePath":"pages/home/index",
+      "text":"我的音乐",
+      "iconPath":"images/cm2_btm_icn_music.png",
+      "selectedIconPath":"images/cm2_btm_icn_music_prs.png"
+    },{
+      "pagePath":"pages/search/index",
+      "text":"账号",
+      "iconPath":"images/cm2_btm_icn_account.png",
+      "selectedIconPath":"images/cm2_btm_icn_account_prs.png"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug":true
+}

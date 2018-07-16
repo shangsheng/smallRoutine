@@ -1,0 +1,23 @@
+<!--pages/playlist/detail.wxml-->
+<view class='playlist'>
+  <view class='playlistTop'>
+    <view class='playlist-rnd-top'>
+      <view class='palylist-top-img'>
+        <image src='{{detail.picUrl}}' class='imgName'></image>
+        <view class='playlist-number'>
+          <image src='logo.t'></image>
+          <text>{{detail.playCount}}</text>
+        </view>
+        <image class='i-p' src='logo.i'></image>
+      </view>
+      <view class='playlist-top-name'>
+        <view class='playlist-top-title'>{{detail.name}}</view>
+        <view class='playlist-top-name-img'>
+          <image src='{{detail.creator.avatarUrl}}'></image>
+          <text>{{detail.creator.nickname}} ></text>
+        </view>
+      </view>
+    </view>
+    <image class='playlistBgc' src='{{detail.coverImgUrl}}'></image>
+  </view>
+</view>

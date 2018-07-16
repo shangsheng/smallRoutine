@@ -1,0 +1,103 @@
+/**index.wxss**/
+.banner{
+  box-sizing: border-box;
+  width: 100%;
+  height: 200px;
+}
+.banner .banner-item{
+  box-sizing: border-box;
+  width: 100%;
+}
+.banner .banner-item image{
+  width: 100%;
+  height:100%;
+}
+.rsp{
+  width: 100%;
+  height: 36px;
+  border-bottom: 1px solid #f4f4f4;
+}
+.rsp .rsp-list{
+  width: 33.33%;
+  padding: 10px 0;
+  float: left;
+  font-size: 12px;
+  text-align: center;
+}
+.index{
+  padding-top: 10px;
+  width: 100%;
+}
+.index .titles{
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 10px;
+}
+.index .index-item{
+  padding: 5px;
+}
+.index .index-item .index-list{
+  float: left;
+  width: 33.33%;
+  padding-left: 1px;
+  padding-right: 1px;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 160px;
+}
+.index .index-item .index-list .list-item-img{
+  width: 100%;
+  height: 90px;
+}
+.index .index-item .index-list .earCup{
+  position: absolute;
+  top: 0;
+  right: 4px;
+}
+.index .index-item .index-list .earCup image{
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
+}
+.index .index-item .index-list .earCup text{
+  font-size: 12px;
+  color: #ffffff;
+  margin-left: 2px;
+}
+.index .index-item .index-list .index-abstract{
+  padding-top: 5px;
+  font-size: 12px;
+  color: #666;
+  padding-left: 5px;
+  font-weight: bold;
+}
+.index .index-item .index-list .index-abstract .index-name{
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.index .index-item .index-list .index-abstract .index-artists{
+  font-size: 11px;
+  color: #999;
+  font-weight: normal;
+}
+.index .index-item .index-list .djpogram-index-title{
+  position: absolute;
+  top:-4px;
+  left: 4px;
+}
+.index .index-item .index-list .djpogram-index-title text{
+  padding: 1px 2px;
+  font-size: 11px;
+  color: #ffffff;
+  background-color: #BB2c08;
+}
+.index .index-item .index-list .dj-item-title{
+  position: absolute;
+  bottom: 10px;
+  left: 4px;
+}
