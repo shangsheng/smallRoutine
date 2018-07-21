@@ -1,0 +1,192 @@
+/* pages/music/song.wxss */
+.musicDisc{
+  padding:10px;
+  /* background-color: #000; */
+}
+.musicDisc .musicDisc-top{
+ position: relative; 
+ padding-top: 90px;
+}
+.musicDisc .musicDisc-top .musicDisc-img-l{
+  width: 111px;
+  height: 183px;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  margin-left: -55.5px;
+  transform:rotate(-26deg); 
+  z-index: 99;
+}
+.musicDisc .musicDisc-top .musicDisc-img-l.plays{
+  animation: yidong 1s initial 1;
+  transform: rotate(0);
+}
+@keyframes yidong{
+  form{
+    transform: rotate(-26deg);
+  }
+  to{
+    transform: rotate(0);
+  }
+}
+.musicDisc .musicDisc-top .discImg{
+  width: 298px;
+  height: 298px;
+  margin: 0 auto;
+  position: relative;
+  display: block;
+}
+.musicDisc .musicDisc-top .discImg .imgBgc{
+  width: 298px;
+  height: 298px;
+}
+.musicDisc .musicDisc-top .discImg .imgSong{
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  top: 50%;
+  left: 50%;
+  margin-top: -105px;
+  margin-left: -105px;
+  border-radius: 50%;
+}
+.musicDisc .musicDisc-top .discImg .radius{
+  animation: radius 2s linear infinite;
+}
+@keyframes radius{
+  0%{
+    transform: rotate(0);
+  }
+  25%{
+    transform: rotate(90deg);
+  }
+  50%{
+    transform: rotate(180deg);
+  }
+  75%{
+    transform: rotate(270deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+.musicDisc .musicDisc-bottom{
+  padding-top: 10px;
+}
+.musicDisc .musicDisc-bottom .operate{
+  padding: 10px 10px;
+  margin: 0 auto;
+  width: 300px;
+}
+.musicDisc .musicDisc-bottom .operate image{
+  width: 70px;
+  height: 70px;
+  /* margin: 10px 10px; */
+  vertical-align: middle;
+}
+.musicDisc .musicDisc-bottom .operate .xiazai,.musicDisc .musicDisc-bottom .operate .pinglun{
+  display: inline-block;
+  vertical-align: middle;
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+.musicDisc .musicDisc-bottom .operate .xiazai text{
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  color: #fff;
+  font-size: 12px;
+}
+.musicDisc .musicDisc-bottom .operate .pinglun text{
+  position: absolute;
+  top: 18px;
+  right: 23px;
+  color: #fff;
+  font-size: 12px;
+}
+.musicDisc .musicDisc-bottom .jindutiao{
+  font-size: 12px;
+  color: #fff;
+}
+.musicDisc .musicDisc-bottom .jindutiao text{
+  font-size: 12px;
+  color: #fff;
+}
+.musicDisc .musicDisc-bottom .jindutiao .line{
+  width: 75%;
+  display: inline-block;
+  height: 2px;
+  background-color: #fff;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.musicDisc .musicDisc-bottom .jindutiao .lineColor{
+  background-color: #d33a31;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100px;
+}
+.musicDisc .musicDisc-bottom .qihuan{
+  padding: 10px;
+}
+.musicDisc .musicDisc-bottom .moshi{
+  display: inline-block;
+  overflow: visible;
+  width: 40px;
+  vertical-align: middle;
+}
+.musicDisc .musicDisc-bottom .qihuan .danquxinhuan,.musicDisc .musicDisc-bottom .qihuan .leibiao,
+.musicDisc .musicDisc-bottom .qihuan .suiji {
+  width: 40px;
+  /* height: 40px; */
+  display: inline-block;
+  vertical-align: middle;
+}
+.musicDisc .musicDisc-bottom .qihuan .danquxinhuan text,.musicDisc .musicDisc-bottom .qihuan .leibiao text,
+.musicDisc .musicDisc-bottom .qihuan .suiji text{
+  color: #fff;
+  font-size: 12px;
+  border-radius: 10px;
+  position: fixed;
+  background-color: #ccc;
+  width: 100px;
+  top: 80%;
+  left: 50%;
+  margin-left: -50px;
+  text-align: center;
+}
+.musicDisc .musicDisc-bottom .qihuan .danquxinhuan image,.musicDisc .musicDisc-bottom .qihuan .leibiao image,
+.musicDisc .musicDisc-bottom .qihuan .suiji image{
+  width: 40px;
+  height: 40px;
+}
+.musicDisc .musicDisc-bottom .bofang{
+  display: inline-block;
+  vertical-align: middle;
+}
+.musicDisc .musicDisc-bottom .bofang image{
+  width: 60px;
+  height: 60px;
+  /* margin: 0 5px; */
+}
+.musicDisc .musicDisc-bottom .liebiao1{
+  width: 60px;
+  height: 60px;
+  vertical-align: middle;
+}
+.musicBgcImg{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-filter: blur(25px);
+  -ms-filter: blur(25px);
+  filter: blur(25px); 
+  z-index: -1;
+}

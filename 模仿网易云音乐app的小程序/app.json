@@ -8,7 +8,9 @@
     "pages/recommend/index",
     "pages/song/index",
     "pages/ranking/index",
-    "pages/playlist/detail"
+    "pages/playlist/detail",
+    "pages/album/album",
+    "pages/music/song"
   ],
   "window":{
     "backgroundTextStyle":"light",

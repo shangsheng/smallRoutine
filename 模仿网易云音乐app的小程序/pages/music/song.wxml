@@ -1,0 +1,57 @@
+<view class="musicDisc">
+  <view class='musicDisc-top'>
+    <image src='../../images/aag.png' class='musicDisc-img-l {{ palys ? "plays" : ""}}'></image>
+    <view class='discImg'>
+      <image src='../../images/play.png' class='imgBgc'></image>
+      <image src='{{music[0].imgUrl}}' class='imgSong {{ radius ? "radius" : ""}}'></image>
+    </view>
+  </view>
+  <view class='musicDisc-bottom'>
+    <view class='operate'>
+      <image src='../../images/a_r.png' class='shoucang1' hidden='{{ar}}'></image>
+       <image src='../../images/a_t.png' class='shoucang2' hidden='{{at}}'></image> 
+      <view class='xiazai'>
+       <image src='../../images/a_i.png' class='xiazai1' hidden='{{ai}}'></image>
+      <image src='../../images/a_k.png' class='xiazai2' hidden='{{ak}}'></image>
+      </view>
+       <view class='pinglun'>
+        <image src='../../images/a_e.png' class='pinglu1' hidden='{{ae}}'></image>
+       <image src='../../images/a_f.png' class='pinglu2' hidden='{{af}}'></image>
+       <text hidden='{{af}}'>{{commentscount}}</text>
+       </view> 
+      <image src='../../images/a_x.png' class='liebiao'></image>
+    </view>
+    <view class='jindutiao'>
+      <text class='kaishi'>{{playtime}}</text>
+      <view class='line'>
+        <view class='lineColor'></view>
+      </view>
+      <text class='jieshu'>{{duration}}</text>
+    </view>
+    <view class='qihuan'>
+      <view class='moshi'>
+        <view class='danquxinhuan' hidden='{{dq}}'>
+          <image src='../../images/a_y.png' hidden='{{dq}}'></image>
+           <text hidden='{{dqs}}'>单曲循环</text> 
+        </view>
+         <view class='leibiao' hidden='{{lb}}'>
+          <image src='../../images/a_p.png' hidden='{{lb}}'></image>
+          <text hidden='{{lbs}}' >列表播放</text>
+        </view>
+        <view class='suiji' hidden='{{sj}}'>
+          <image src='../../images/aa9.png' hidden='{{sj}}'></image>
+          <text hidden='{{sjs}}'>随机播放</text>
+        </view> 
+      </view>
+      <!-- 播放键 -->
+      <view class='bofang'>
+        <image src='../../images/ajb.png' catchtap='songLeft'></image>
+        <image src='../../images/ajd.png' catchtap='songBf' hidden='{{hiddenBf}}'></image>
+         <image src='../../images/ajf.png' catchtap='songZt' hidden='{{hiddenZt}}'></image> 
+        <image src='../../images/ajh.png' catchtap='songRight'></image>
+      </view>
+      <image src='../../images/aab.png' class='liebiao1'></image>
+    </view>
+  </view>
+  <image class='musicBgcImg' src='{{music[0].imgUrl}}'></image>
+</view>

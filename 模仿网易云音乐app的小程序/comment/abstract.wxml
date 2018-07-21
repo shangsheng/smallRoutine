@@ -1,0 +1,19 @@
+<template name="abstract">
+  <view class='abstract'>
+  <scroll-view scroll-y style="height: 100%;">
+      <view class='abstract-img'>
+        <image src='{{abstractArtists.absImgUrl}}'></image>
+      </view>
+      <view class='abstractName'>{{abstractArtists.briefDesc}}</view>
+      <view class='abstractLabel'></view>
+      <view class='abstractConter'>
+        <block wx:for="{{abstractArtists.introduction}}" wx:key="">
+          <view class='abstractList'>
+            <view class='abstractLeft'>{{item.ti}}</view>
+            <view class='abstractRight'>{{item.txt}}</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+</template>

@@ -1,3 +1,4 @@
+/* pages/album/album.wxss */
 /* pages/playlist/detail.wxss */
 .playlist{
   /* padding-left: 10px;
@@ -87,6 +88,8 @@
 .playlistTop .playlist-rnd-top .playlist-top-name .playlist-top-name-img text{
   color: #fff;
   font-size: 12px;
+  display: block;
+  margin-bottom: 5px;
 }
 .playlistTop .playlist-tab{
   margin-top: 10px;
@@ -110,7 +113,7 @@
   padding-left: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background-color: #f0f4f3;
+  background-color: #fff;
 }
 .playlist-bottom .playlistBotomTop{
   padding-bottom: 10px;

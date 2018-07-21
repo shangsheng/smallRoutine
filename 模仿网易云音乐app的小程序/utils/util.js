@@ -9,8 +9,8 @@ function formatTime (date,type){
   var minute = d.getMinutes();
   var second = d.getSeconds();
   if(type === 1){
-    return [year,month,day].map(formatNumber).join('/')+ '' + [hour,minute,second].map(formatNumber).join(':');
-  }else{
+    return [year,month,day].map(formatNumber).join('.')+ '' + [hour,minute,second].map(formatNumber).join(':');
+  }else if(type === 2){
     var current = new Date();
     var curtimes = current.getTime();
     if((curtimes - date)<24*3600000){
@@ -26,6 +26,8 @@ function formatTime (date,type){
     }else{
       return month + "月" + day + "日"
     }
+  }else{
+    return [year, month, day].map(formatNumber).join('.');
   }
 }
 
@@ -194,6 +196,18 @@ function loadlrc(that) {
     })
   }
 }
+//万和亿和千的操作
+function wyq (num){
+  if(num<9999){
+    return num;
+  }else if(num<99999999){
+    num =( Math.floor(num / 10000))+ "万";
+    return num;
+  }else if(num>100000000){
+    num =( Math.floor(num / 100000000))+ "亿";
+    return num;
+  }
+}
 module.exports = {
   formatTime: formatTime,
   formatduration: formatduration,
@@ -201,5 +215,6 @@ module.exports = {
   playAlrc: playAlrc,
   loadlrc: loadlrc,
   loadrec: loadrec,
-  fetchGet: fetchGet
+  fetchGet: fetchGet,
+  wyq: wyq
 }

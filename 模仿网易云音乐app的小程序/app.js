@@ -34,6 +34,13 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    detail:{},
+    playSong:[],
+    musicSong:[],
+    privileges:[],
+    hiddenBf: true,
+    hiddenZt: false,
+    palys:false,
   }
 })

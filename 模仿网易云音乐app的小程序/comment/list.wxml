@@ -4,7 +4,7 @@
       <view class='index-list' data-listId="{{item.id}}">
         <navigator url='/pages/playlist/detail?id={{item.id}}'>
           <image src="{{item.picUrl}}" class='list-item-img'></image>
-          <view class='earCup'><image src='../../images/p0.png'></image><text>{{item.trackCount}}万</text></view>
+          <view class='earCup'><image src='../../images/p0.png'></image><text>{{item.playCount}}</text></view>
           <view class='index-abstract'>{{item.name}}</view>
         </navigator>
       </view>
@@ -15,7 +15,7 @@
   <view class='index-list-item clearfix'>
     <block wx:for="{{newSongIndex}}" wx:key="">
       <view class='index-list' data-listId="{{item.album.artists[0].id}}">
-        <navigator url="/pages/playlist/detail?id={{item.albumartists[0].id}}">
+        <navigator url="/pages/album/album?id={{item.album.artists[0].id}}">
           <image src="{{item.album.picUrl}}" class='list-item-img'></image>
           <view class='index-abstract'>
             <text class='index-name'>{{item.album.name}}</text>

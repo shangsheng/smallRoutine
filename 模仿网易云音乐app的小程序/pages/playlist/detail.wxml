@@ -1,14 +1,16 @@
 <!--pages/playlist/detail.wxml-->
+<import src="../../comment/playscroll.wxml" />
+<import src="../../comment/musicList.wxml"/>
 <view class='playlist'>
   <view class='playlistTop'>
-    <view class='playlist-rnd-top'>
+    <view class='playlist-rnd-top' data-id="{{detail.id}}" bindtap='abstracts'>
       <view class='palylist-top-img'>
         <image src='{{detail.picUrl}}' class='imgName'></image>
         <view class='playlist-number'>
-          <image src='logo.t'></image>
+          <image src='{{logo.t}}'></image>
           <text>{{detail.playCount}}</text>
         </view>
-        <image class='i-p' src='logo.i'></image>
+        <image class='i-p' src='{{logo.i}}'></image>
       </view>
       <view class='playlist-top-name'>
         <view class='playlist-top-title'>{{detail.name}}</view>
@@ -19,5 +21,80 @@
       </view>
     </view>
     <image class='playlistBgc' src='{{detail.coverImgUrl}}'></image>
+    <view class='playlist-tab'>
+      <view class='playlist-li'>
+        <image src='{{logo.w3}}'></image>
+        <text>{{detail.commentCount}}</text>
+      </view>
+       <view class='playlist-li'>
+        <image src='{{logo.wd}}'></image>
+        <text>{{detail.shareCount}}</text>
+      </view>
+      <view class='playlist-li'>
+        <image src='{{logo.w5}}'></image>
+        <text>{{logo.xz}}</text>
+      </view>
+      <view class='playlist-li'>
+        <image src='{{logo.w7}}'></image>
+        <text>{{logo.dx}}</text>
+      </view>
+    </view>
   </view>
+  <!-- 内容列表 -->
+  <view class='playlist-bottom'>
+    <view class='playlistBotomTop'>
+      <view class='playAll' catchtap='palyAll' data-id="{{playSong[0].id}}">
+        <image src='{{logo.playUrl}}'></image>
+        <view class='play-title'>播放全部 <text>(共{{detail.tracks.length}}首)</text></view>
+      </view>
+      <view class='Search'>
+        <text>+ 收藏({{detail.subscribedCount}})</text>
+      </view>
+    </view>
+    <view class='playScroll'>
+       <template is="playscroll" data="{{playSong}}"/> 
+    </view>
+  </view>
+</view>
+<loading class="loading" hidden="{{hidden}}">
+  <text class="loading-font">加载中...</text>
+</loading>
+<!-- 弹框 -->
+<view class='tankuangjianjie' hidden='{{abstractHidden}}' bindtap='guanbi'>
+  <view class='abstract'>
+  <scroll-view scroll-y style="height: 100%;">
+      <view class='abstract-img'>
+        <image src='{{abstractDetail.picUrl}}'></image>
+      </view>
+      <view class='abstractName' style='text-align:center;'>{{abstractDetail.name}}</view>
+      <view class='abstractLabel'>标签：<block wx:for="{{abstractDetail.tags}}" wx:key=""><text>{{item}}</text></block></view>
+      <view class='abstractConter'>
+          <view class='abstractList'>
+            <view class='abstractLeft'>{{abstractDetail.description}}</view>
+          </view>
+      </view>
+    </scroll-view>
+  </view>
+  <image src='{{abstractDetail.coverImgUrl}}' class='jianjieImg'></image>
+</view>
+<!-- 底部播放列表 -->
+<view class='songList' hidden='{{songlist}}'>
+  <!-- <template is="musicSong" data="{{musicSong}}"/> -->
+    <view class='music-div'>
+      <view class='music-left'>
+        <navigator url='/pages/music/song?id={{musicSong[0].id}}'>
+          <image class='music-img' src='{{musicSong[0].imgUrl}}'></image>
+          <view class='music-span'>
+            <text class='music-name'>{{musicSong[0].name}}</text>
+            <text class='music-avator'>{{musicSong[0].author}}</text>
+          </view>
+        </navigator> 
+      </view>
+      <view class='music-right'>
+        <image src='../../images/ajb9.png' catchtap='songLeft'></image>
+        <image src='../../images/ajd9.png' catchtap='songBf' hidden='{{hiddenBf}}'></image>
+        <image src='../../images/ajf9.png' catchtap='songZt' hidden='{{hiddenZt}}'></image>
+        <image src='../../images/ajh9.png' catchtap='songRight'></image>
+      </view>
+    </view>
 </view>

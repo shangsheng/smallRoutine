@@ -1,0 +1,25 @@
+<template name="playscroll">
+  <view class='playscroll-ul'>
+    <scroll-view scroll-y style="height: 100%;">
+    <block wx:for="{{playSong}}" wx:key="">
+     <view class='playscroll-li'>
+      <view class='playName' catchtap='palyClick' data-index="{{index}}" id="{{item.id}}">
+        <image src='{{item.playUrl}}' class='playimg' hidden='{{item.play}}'></image>
+        <view class='playName-item {{item.textHidden ? "play-marginLeft" : ""}}'>
+          <text class='item-num' wx:if="{{index>8}}" hidden="{{item.textHidden}}">{{index+1}}</text>
+          <text class='item-num' wx:else hidden="{{item.textHidden}}">0{{index+1}}</text>
+          <view class='play-songName'>
+            <text class='playSongName'>{{item.name}}<text>{{item.alia}}</text></text>
+            <text class='playAuthor'>{{item.authorName}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='songMoer'>
+        <image src='{{item.videoUrl}}' hidden='{{item.video}}'></image>
+        <!-- <image src='{{item.mUrl}}'></image> --><!--由于图片没有灰色的省略号所以没有写-->
+      </view>
+    </view>
+    </block>
+  </scroll-view>
+  </view>
+</template>

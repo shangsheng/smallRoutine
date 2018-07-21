@@ -1,0 +1,41 @@
+<!--pages/playlist/detail.wxml-->
+<import src="../../comment/playscroll.wxml" />
+<import src="../../comment/abstract.wxml"/>
+<view class='playlist'>
+  <view class='playlistTop'>
+    <view class='playlist-rnd-top' data-id='{{detail.id}}' bindtap='abstracts'>
+      <view class='palylist-top-img'>
+        <image src='{{detail.picUrl}}' class='imgName'></image>
+        <image class='i-p' src='{{logo.i}}'></image>
+      </view>
+      <view class='playlist-top-name'>
+        <view class='playlist-top-title'>{{detail.briefDesc}}</view>
+        <view class='playlist-top-name-img'>
+          <text>歌手:{{detail.name}} ></text>
+          <text>发布时间:{{detail.publishTime}}</text>
+        </view>
+      </view>
+    </view>
+    <image class='playlistBgc' src='{{detail.img1v1Url}}'></image>
+  </view>
+  <!-- 内容列表 -->
+  <view class='playlist-bottom'>
+    <view class='playlistBotomTop'>
+      <view class='playAll'>
+        <image src='{{logo.playUrl}}'></image>
+        <view class='play-title'>播放全部 <text>(共{{playSong.length}}首)</text></view>
+      </view>
+    </view>
+    <view class='playScroll'>
+       <template is="playscroll" data="{{playSong}}"/> 
+    </view>
+  </view>
+</view>
+<loading class="loading" hidden="{{hidden}}">
+  <text class="loading-font">加载中...</text>
+</loading>
+<!-- 弹框 -->
+<view class='tankuangjianjie' hidden='{{abstractHidden}}' bindtap='guanbi'>
+  <template is="abstract" data="{{abstractArtists}}"/>
+  <image src='{{abstractArtists.absImgUrl}}' class='jianjieImg'></image>
+</view>

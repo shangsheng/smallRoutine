@@ -1,0 +1,21 @@
+<!--pages/music/song.wxml-->
+<template name="musicSong">
+<block wx:for = "musicSong" wx:key="">
+  <view class='music-div'>
+    <view class='music-left'>
+      {{item}}
+      <image class='music-img' src='{{item[0].imgUrl}}'></image>
+      <view class='music-span'>
+        <text class='music-name'>{{item[0].name}}</text>
+        <text class='music-avator'>{{item[0].author}}</text>
+      </view>
+    </view>
+    <view class='music-right'>
+      <image src='../../images/ajb9.png' bindtap='songLeft'></image>
+      <image src='../../images/ajd9.png' bindtap='songBf' hidden='{{item[0].hiddenBf}}'></image>
+      <image src='../../images/ajf9.png' bindtap='songZt' hidden='{{item[0].hiddenZt}}'></image>
+      <image src='../../images/ajh9.png' bindtap='songRight'></image>
+    </view>
+  </view>
+  </block>
+</template>
