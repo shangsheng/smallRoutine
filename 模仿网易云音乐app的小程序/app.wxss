@@ -100,6 +100,7 @@
 }
 .songList .music-div .music-left{
   display: inline-block;
+  width: 60%;
 }
 .songList .music-div .music-left .music-img{
   width: 35px;
@@ -110,15 +111,23 @@
 .songList .music-div .music-left  .music-span{
   display: inline-block;
   vertical-align: middle;
+  width: 78%;
 }
 .songList .music-div .music-left  .music-span .music-name{
   display: block;
   font-size: 13px;
   color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .songList .music-div .music-left  .music-span .music-avator{
   font-size: 12px;
   color: #999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 .songList .music-div .music-right{
   float: right;
@@ -127,4 +136,7 @@
   width: 35px;
   height: 35px;
   margin-right: 5px;
+}
+.playscroll-ul-bottom{
+  padding-bottom: 60px;
 }

@@ -1,6 +1,7 @@
 <!--pages/playlist/detail.wxml-->
 <import src="../../comment/playscroll.wxml" />
 <import src="../../comment/abstract.wxml"/>
+<import src="../../comment/musicList.wxml"/>
 <view class='playlist'>
   <view class='playlistTop'>
     <view class='playlist-rnd-top' data-id='{{detail.id}}' bindtap='abstracts'>
@@ -26,8 +27,8 @@
         <view class='play-title'>播放全部 <text>(共{{playSong.length}}首)</text></view>
       </view>
     </view>
-    <view class='playScroll'>
-       <template is="playscroll" data="{{playSong}}"/> 
+    <view class='playScroll {{songlist?"":"playscroll-ul-bottom"}}'>
+       <template is="playscroll" data="{{playSong:playSong}}"/> 
     </view>
   </view>
 </view>
@@ -36,6 +37,11 @@
 </loading>
 <!-- 弹框 -->
 <view class='tankuangjianjie' hidden='{{abstractHidden}}' bindtap='guanbi'>
-  <template is="abstract" data="{{abstractArtists}}"/>
+  <template is="abstract" data="{{abstractArtists:abstractArtists}}"/>
   <image src='{{abstractArtists.absImgUrl}}' class='jianjieImg'></image>
+</view>
+<!-- 播放 -->
+<!-- 底部播放列表 -->
+<view class='songList' hidden='{{songlist}}'>
+  <template is="musicSong" data="{{musicSong:musicSong,hiddenBf:hiddenBf,hiddenZt:hiddenZt}}"/>
 </view>

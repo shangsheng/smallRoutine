@@ -24,24 +24,16 @@
     <view class='jindutiao'>
       <text class='kaishi'>{{playtime}}</text>
       <view class='line'>
-        <view class='lineColor'></view>
+        <view class='lineColor' style='width:{{timeWidth}}%'></view>
       </view>
-      <text class='jieshu'>{{duration}}</text>
+      <text class='jieshu'>{{durationTime}}</text>
     </view>
     <view class='qihuan'>
       <view class='moshi'>
-        <view class='danquxinhuan' hidden='{{dq}}'>
-          <image src='../../images/a_y.png' hidden='{{dq}}'></image>
-           <text hidden='{{dqs}}'>单曲循环</text> 
+         <view class='leibiao' bindtap='playMode' data-id="{{modeIndex}}">
+          <image src='{{mode.modeUrl}}'></image>
+          <text hidden='{{lbs}}' >{{mode.title}}</text>
         </view>
-         <view class='leibiao' hidden='{{lb}}'>
-          <image src='../../images/a_p.png' hidden='{{lb}}'></image>
-          <text hidden='{{lbs}}' >列表播放</text>
-        </view>
-        <view class='suiji' hidden='{{sj}}'>
-          <image src='../../images/aa9.png' hidden='{{sj}}'></image>
-          <text hidden='{{sjs}}'>随机播放</text>
-        </view> 
       </view>
       <!-- 播放键 -->
       <view class='bofang'>
@@ -50,8 +42,43 @@
          <image src='../../images/ajf.png' catchtap='songZt' hidden='{{hiddenZt}}'></image> 
         <image src='../../images/ajh.png' catchtap='songRight'></image>
       </view>
-      <image src='../../images/aab.png' class='liebiao1'></image>
+      <image src='../../images/aab.png' class='liebiao1' bindtap='actionLie'></image>
     </view>
   </view>
   <image class='musicBgcImg' src='{{music[0].imgUrl}}'></image>
 </view>
+<!-- 歌曲类表 -->
+  <view class='musicSongFiex' hidden='{{actionListHidden}}' bindtap='actionSheetChange'>
+    <view class='musicContent'>
+      <view class='musicSongFiex-top'>
+          <view class='musicSongFiex-left' catchtap='playMode' data-id="{{modeIndex}}">
+            <image src='{{mode.modeUrl9}}'></image>
+            <text>{{mode.title}}({{playSong.length}})</text>
+          </view>
+          <view class='musicSongFiex-right'>
+            <view class='musicSongFiex-shocang'>
+              <image src='../../images/w79.png'></image>
+              <text>收藏全部</text>
+            </view>
+            <image src='../../images/fm/cm2_fm_btn_delete9@2x.png'></image>
+          </view>
+      </view>
+      <view class='musicSongFiex-bottom'>
+       <scroll-view scroll-y style="height:86%">
+        <block wx:for="{{playSong}}" wx:key="">
+          <view class='bottom-border'>
+            <view class='musicContent-left' data-id='{{item.privilege.id}}' data-index='{{index}}' bindtap='privilegeVebo'>
+              <image src='../../images/aal.png' hidden='{{item.play}}'></image>
+              <view class='name-author {{item.play?"":"name-author-color"}}'>
+                <text class='name'>{{item.name}}</text>-<text>{{item.ar[0].name}}</text>
+              </view>
+            </view>
+            <view class='musicContent-right' catchtap='deleteSong' data-index='{{index}}'>
+              <image src='{{item.deleteImg}}'></image>
+            </view>
+          </view>
+        </block>
+        </scroll-view>
+      </view>
+    </view>
+  </view>

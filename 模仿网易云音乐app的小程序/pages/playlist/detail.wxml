@@ -51,8 +51,8 @@
         <text>+ 收藏({{detail.subscribedCount}})</text>
       </view>
     </view>
-    <view class='playScroll'>
-       <template is="playscroll" data="{{playSong}}"/> 
+    <view class='playScroll {{songlist?"":"playscroll-ul-bottom"}}'>
+       <template is="playscroll" data="{{playSong:playSong}}"/> 
     </view>
   </view>
 </view>
@@ -79,8 +79,8 @@
 </view>
 <!-- 底部播放列表 -->
 <view class='songList' hidden='{{songlist}}'>
-  <!-- <template is="musicSong" data="{{musicSong}}"/> -->
-    <view class='music-div'>
+  <template is="musicSong" data="{{musicSong}}"/>
+    <!-- <view class='music-div'>
       <view class='music-left'>
         <navigator url='/pages/music/song?id={{musicSong[0].id}}'>
           <image class='music-img' src='{{musicSong[0].imgUrl}}'></image>
@@ -96,5 +96,5 @@
         <image src='../../images/ajf9.png' catchtap='songZt' hidden='{{hiddenZt}}'></image>
         <image src='../../images/ajh9.png' catchtap='songRight'></image>
       </view>
-    </view>
+    </view> -->
 </view>

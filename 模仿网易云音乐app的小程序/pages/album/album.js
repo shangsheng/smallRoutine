@@ -1,6 +1,8 @@
 // pages/playlist/detail.js
 var api = require("../../utils/api.js");
 var util = require("../../utils/util.js");
+var app = getApp();
+console.log(app)
 // 固定不变的logo
 var logo = {
   t: "/images/p0.png", i: "/images/cm2_list_detail_icn_infor@2x.png", w3: "/images/w3.png", w5: "/images/w5.png",
@@ -23,21 +25,43 @@ Page({
     video: true,
     playSong: [],
     abstractArtists:{},
-    abstractHidden:true
+    abstractHidden:true,
+    songlist:true,
+    musicSong:[],
+    songIndex:0,
+    hiddenBf: true,
+    hiddenZt: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.fetChGet(options.id);
+    console.log(this)
+    var newDetail = wx.getStorageSync("detail");
+   
+    if (newDetail != "" && parseInt(options.id) === newDetail.id){
+      this.setData({
+        detail:newDetail,
+        hiddenBf:app.globalData.hiddenBf,
+        hiddenZt:app.globalData.hiddenZt,
+        musicSong:app.globalData.musicSong,
+        playSong:app.globalData.playSong,
+        play:app.globalData.palys,
+        hidden: true,
+        songlist: false,
+      })
+    }else{
+        this.fetChGet(options.id);
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    //清楚本地存储
+    wx.setStorageSync("playSong", "")
   },
 
   /**
@@ -88,7 +112,6 @@ Page({
     var that = this;
     var ApiUrl = api._artists + "?id=" + id;
     util.fetchGet(ApiUrl, function (err, res) {
-      console.log(res)
       // res.playlist.subscribedCount = util.wyq(res.playlist.subscribedCount);
       res.artist.publishTime = util.formatTime(res.artist.publishTime,3);
       res.artist.briefDesc = that.cutString(res.artist.briefDesc,60)
@@ -137,6 +160,8 @@ Page({
     var index = e.currentTarget.dataset.index;
     console.log(_that.data.playSong[index])
     var urlSong = api._musicUrl + "?id=" + id;
+    //获取歌曲的演唱歌手名字
+    var arName = _that.data.playSong[index].ar[0].name;
     util.fetchGet(urlSong, function (err, res) {
       console.log(res);
       _that.setData({
@@ -149,12 +174,29 @@ Page({
             item.textHidden = false;
           }
           return item
+        }),
+        musicSong: res.data.map(function (item) {
+
+          item.name = _that.data.playSong[index].name;
+          item.author = arName;
+          item.imgUrl = _that.data.playSong[index].al.picUrl;
+          // item.hiddenBf = app.globalData.hiddenBf;
+          // item.hiddenZt = app.globalData.hiddenZt;
+          return item
         })
       })
+      console.log(_that.data.musicSong[0])
+      setTimeout(function () {
+        _that.setData({ hidden: true, songlist: false, songIndex: index })
+        app.globalData.onplays = _that.onplays;
+        app.globalData.songIndex = index;
+        app.globalData.musicSong = _that.data.musicSong;
+        app.globalData.playSong = _that.data.playSong;
+        app.musicPaly(_that.data.musicSong[0].url);
+        wx.setStorageSync("detail", _that.data.detail);
+      }, 300);
     });
-    setTimeout(function () {
-      _that.setData({ hidden: true })
-    }, 300);
+    console.log(app)
   },
 /**参数说明： 
  
@@ -231,5 +273,170 @@ return s;
  /**点击关闭简介*/
  guanbi:function(){
    this.setData({abstractHidden: true })
- } 
+ } ,
+  /***
+   * 监听播放顺序
+   */
+  onplays:function(){
+    var that = this;
+    app.globalData.backgroundAudioManager.onWaiting(function () {
+      that.setData({
+        hiddenBf:false,
+        hiddenZt: true,
+        palys:true
+      })
+      console.log("加载中")
+      app.globalData.hiddenBf = that.data.hiddenBf;
+      app.globalData.hiddenZt = that.data.hiddenZt;
+      app.globalData.palys = that.data.palys;
+    })
+   app.globalData.backgroundAudioManager.onPlay(function () {
+      that.setData({
+        hiddenBf: false,
+        hiddenZt: true,
+        palys:true
+      })
+      console.log("开始播放")
+     app.globalData.hiddenBf = that.data.hiddenBf;
+     app.globalData.hiddenZt = that.data.hiddenZt;
+     app.globalData.palys = that.data.palys;
+    });
+    app.globalData.backgroundAudioManager.onEnded(function () {
+      var pavIndex = that.data.songIndex +1;
+      that.publicMusic(pavIndex)
+    });
+    app.globalData.backgroundAudioManager.onTimeUpdate(function () {
+      app.globalData.currentTime = app.globalData.backgroundAudioManager.currentTime;
+      app.globalData.duration = app.globalData.backgroundAudioManager.duration;
+    });
+    app.globalData.backgroundAudioManager.onError(function (err) {
+      console.log(err)
+    })
+    app.globalData.backgroundAudioManager.onPause(function(){
+      that.setData({
+        hiddenBf: true,
+        hiddenZt: false,
+        palys:false
+      })
+      console.log("暂停")
+      app.globalData.hiddenBf = that.data.hiddenBf;
+      app.globalData.hiddenZt = that.data.hiddenZt;
+      app.globalData.palys = that.data.palys;
+    })
+    app.globalData.backgroundAudioManager.onStop(function () {
+      that.setData({
+        hiddenBf: true,
+        hiddenZt: false,
+        palys:false
+      })
+      console.log("停止")
+      app.globalData.hiddenBf = that.data.hiddenBf;
+      app.globalData.hiddenZt = that.data.hiddenZt;
+      app.globalData.palys = that.data.palys;
+    })
+  },
+  /***
+     * 公共的请求音乐类
+     */
+  publicMusic: function (pavIndex) {
+
+    var that = this;
+    var id = that.data.playSong[pavIndex].privilege.id;
+    var urlSong = api._musicUrl + "?id=" + id;
+    //获取歌曲的演唱歌手名字
+    var arName = that.data.playSong[pavIndex].ar[0].name;
+    for (var i = 0; i < that.data.playSong[pavIndex].ar.length - 1; i++) {
+
+      if (that.data.playSong[pavIndex].ar[i + 1]) {
+        arName = arName + "/" + that.data.playSong[pavIndex].ar[i + 1].name;
+      }
+    }
+
+    util.fetchGet(urlSong, function (err, res) {
+
+      that.setData({
+        playSong: that.data.playSong.map(function (item, i) {
+          if (i === pavIndex) {
+            that.data.playSong[pavIndex].play = false;
+            that.data.playSong[pavIndex].textHidden = true;
+          } else {
+            item.play = true;
+            item.textHidden = false;
+          }
+          return item
+        }),
+        musicSong: res.data.map(function (item) {
+
+          item.name = that.data.playSong[pavIndex].name;
+          item.author = arName;
+          item.imgUrl = that.data.playSong[pavIndex].al.picUrl;
+          return item
+        })
+      })
+      setTimeout(function () {
+        that.setData({
+          hiddenBf: true,
+          hiddenZt: false,
+          songIndex: pavIndex,
+          palys: true,
+          playtime: 0
+        })
+        app.globalData.musicSong = that.data.musicSong;
+        app.globalData.hiddenBf = that.data.hiddenBf;
+        app.globalData.hiddenZt = that.data.hiddenZt;
+        app.globalData.palys = that.data.palys;
+        app.globalData.songIndex = that.data.songIndex;
+        app.musicPaly(that.data.musicSong[0].url);
+      }, 300)
+    });
+
+  },
+  /***
+     * 暂停
+     */
+  songBf: function () {
+    const that = this;
+    app.globalData.backgroundAudioManager.pause();
+    that.setData({
+      hiddenBf: true,
+      hiddenZt: false,
+      palys: false
+    })
+    app.globalData.hiddenBf = that.data.hiddenBf;
+    app.globalData.hiddenZt = that.data.hiddenZt;
+    app.globalData.palys = that.data.palys;
+  },
+  /***
+   * 播放
+   */
+  songZt: function () {
+    const that = this;
+    app.globalData.backgroundAudioManager.play();
+    that.setData({
+      hiddenBf: false,
+      hiddenZt: true,
+      palys: true
+    })
+    app.globalData.hiddenBf = that.data.hiddenBf;
+    app.globalData.hiddenZt = that.data.hiddenZt;
+    app.globalData.palys = that.data.palys;
+  },
+  /***上一首*/
+  songLeft: function () {
+    var pavIndex = this.data.songIndex - 1;
+    var that = this;
+    if (pavIndex >= 0) {
+      that.publicMusic(pavIndex);
+    }
+
+  },
+  /**
+   * 下一首
+   */
+  songRight: function () {
+    var pavIndex = this.data.songIndex + 1;
+    var that = this;
+    that.publicMusic(pavIndex);
+
+  },
 })

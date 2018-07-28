@@ -18,6 +18,8 @@ Page({
     this.recommend();
     this.newSong();
     this.djprogram();
+    wx.setStorageSync("detail", "");
+    wx.setStorageSync("musicSong", "");
   },
   // banner
   banner:function(e){

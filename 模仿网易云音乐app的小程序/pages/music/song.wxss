@@ -1,7 +1,7 @@
 /* pages/music/song.wxss */
 .musicDisc{
   padding:10px;
-  /* background-color: #000; */
+   background-color: rgba(0, 0, 0, 0.2); 
 }
 .musicDisc .musicDisc-top{
  position: relative; 
@@ -21,7 +21,7 @@
   animation: yidong 1s initial 1;
   transform: rotate(0);
 }
-@keyframes yidong{
+@keyframes yidong{ 
   form{
     transform: rotate(-26deg);
   }
@@ -51,7 +51,7 @@
   border-radius: 50%;
 }
 .musicDisc .musicDisc-top .discImg .radius{
-  animation: radius 2s linear infinite;
+  animation: radius 60s linear infinite;
 }
 @keyframes radius{
   0%{
@@ -129,10 +129,12 @@
   top: 0;
   left: 0;
   height: 2px;
-  width: 100px;
+  width: 0;
 }
 .musicDisc .musicDisc-bottom .qihuan{
   padding: 10px;
+  width: 300px;
+  margin: 0 auto;
 }
 .musicDisc .musicDisc-bottom .moshi{
   display: inline-block;
@@ -189,4 +191,113 @@
   -ms-filter: blur(25px);
   filter: blur(25px); 
   z-index: -1;
+}
+/* 类表 */
+.musicSongFiex{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.musicSongFiex .musicContent{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #fff;
+  padding: 5px;
+}
+.musicSongFiex .musicContent .musicSongFiex-top{
+  height: 36px;
+}
+.musicSongFiex .musicContent .musicSongFiex-top .musicSongFiex-left{
+  float: left;
+}
+.musicSongFiex .musicContent .musicSongFiex-top .musicSongFiex-left image{
+  height: 36px;
+  width: 36px;
+  vertical-align: middle;
+}
+.musicSongFiex .musicContent .musicSongFiex-top .musicSongFiex-left text{
+  color: #666;
+  font-size: 14px;
+}
+.musicSongFiex .musicContent .musicSongFiex-top .musicSongFiex-right{
+  float: right;
+}
+.musicSongFiex .musicContent .musicSongFiex-top .musicSongFiex-right image{
+  height: 36px;
+  width: 36px;
+  vertical-align: middle;
+}
+.musicSongFiex .musicContent .musicSongFiex-top .musicSongFiex-right .musicSongFiex-shocang{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.musicSongFiex .musicContent .musicSongFiex-top .musicSongFiex-right .musicSongFiex-shocang text{
+  color: #666;
+  font-size: 14px;
+}
+.musicSongFiex .musicContent .musicSongFiex-top .musicSongFiex-right .musicSongFiex-shocang image{
+  height: 18px;
+  width: 18px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 100%;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border{
+  height: 36px;
+  border-bottom: 1px solid #ccc;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border .musicContent-left{
+  float: left;
+  width: 76%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* line-height: 36px; */
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border .musicContent-left image{
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border .musicContent-left .name-author{
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border .musicContent-left .name-author text{
+  font-size: 12px;
+  color: #666;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border .musicContent-left .name-author-color text{
+  color: #d33a31;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border .musicContent-left .name-author-color{
+  margin-left: 5px;
+  color: #d33a31;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border .musicContent-left .name-author .name{
+  font-size: 14px;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border .musicContent-right{
+  float: right;
+  padding-right: 10px;
+  /* padding-top: 10px; */
+  line-height: 36px;
+}
+.musicSongFiex .musicContent .musicSongFiex-bottom .bottom-border .musicContent-right image{
+  width: 18px;
+  height: 18px;
 }

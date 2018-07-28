@@ -8,7 +8,8 @@ var logo = { t: "/images/p0.png", i:"/images/cm2_list_detail_icn_infor@2x.png",w
   video: "/images/cm2_list_btn_icn_mv_new@2x.png", m:"/images/cm2_play_icn_more@2x.png"
 }
 // 创建全局的播放器
-const innerAudioContext = wx.createInnerAudioContext()
+// const innerAudioContext = wx.createInnerAudioContext()
+var playtimeSet;
 Page({
 
   /**
@@ -33,6 +34,7 @@ Page({
       palys:false,
       privileges:[],
       songIndex:0,//播放的第几条歌曲
+      playtime:0
   },
 
   /**
@@ -183,22 +185,22 @@ Page({
           })
         })
         
-        _that.musicPaly(_that.data.musicSong[0].url);
-      });
-
-      setTimeout(function () {
-        _that.setData({
-          hidden: true, 
-          songlist: false, 
-          hiddenBf: false,
-          hiddenZt: true,
-          songIndex:index,
-          palys:true,
+        setTimeout(function () {
+          _that.setData({
+            hidden: true,
+            songlist: false,
+            hiddenBf: false,
+            hiddenZt: true,
+            songIndex: index,
+            palys: true,
           })
-        app.globalData.playSong = _that.data.playSong;
-        app.globalData.hiddenBf = _that.data.hiddenBf;
-        app.globalData.hiddenZt = _that.data.hiddenZt;
-      }, 300);
+          app.globalData.playSong = _that.data.playSong;
+          app.globalData.hiddenBf = _that.data.hiddenBf;
+          app.globalData.hiddenZt = _that.data.hiddenZt;
+          app.globalData.songIndex = _that.data.songIndex;
+          app.musicPaly(_that.data.musicSong[0].url);
+        }, 300);
+      });
       
     },
     /**歌手简介*/
@@ -219,9 +221,9 @@ Page({
     /**
      * 音乐播放
      * */ 
-    musicPaly:function(url){
+    /*musicPaly:function(url){
       app.globalData.musicSong = this.data.musicSong;
-      app.globalData.palys = this.data.palys;
+      app.globalData.innerAudioContext = innerAudioContext;
       const that = this;
       innerAudioContext.autoplay = true
       innerAudioContext.src = url
@@ -233,6 +235,14 @@ Page({
         })
         app.globalData.hiddenBf = that.data.hiddenBf;
         app.globalData.hiddenZt = that.data.hiddenZt;
+        app.globalData.palys = that.data.palys;
+        // playtimeSet = setInterval(function(){
+        //   that.data.playtime = that.data.playtime +1;
+        //   wx.setStorage({
+        //     key: "playTime",
+        //     data: that.data.playtime
+        //   })
+        // },1000)
       })
       innerAudioContext.onError((res) => {
         console.log(res.errMsg)
@@ -242,13 +252,13 @@ Page({
         var nextIndex = that.data.songIndex+1;
         that.publicMusic(nextIndex);
       })
-    },
+    },*/
     /***
      * 暂停
      */
     songBf:function(){
       const that = this;
-      innerAudioContext.pause(()=>{})
+      app.globalData.backgroundAudioManager.pause();
       that.setData({
         hiddenBf: true,
         hiddenZt: false,
@@ -257,22 +267,29 @@ Page({
       app.globalData.hiddenBf = that.data.hiddenBf;
       app.globalData.hiddenZt = that.data.hiddenZt;
       app.globalData.palys = that.data.palys;
+      // clearInterval(playtimeSet)
     },
     /***
      * 播放
      */
     songZt: function (){
       const that = this;
-      innerAudioContext.play(() => {
-        that.setData({
-          hiddenBf: false,
-          hiddenZt: true,
-          palys:true
-        })
-        app.globalData.hiddenBf = that.data.hiddenBf;
-        app.globalData.hiddenZt = that.data.hiddenZt;
-        app.globalData.palys = that.data.palys;
+      app.globalData.backgroundAudioManager.play();
+      that.setData({
+        hiddenBf: false,
+        hiddenZt: true,
+        palys: true
       })
+      app.globalData.hiddenBf = that.data.hiddenBf;
+      app.globalData.hiddenZt = that.data.hiddenZt;
+      app.globalData.palys = that.data.palys;
+      // playtimeSet = setInterval(function () {
+      //   that.data.playtime = that.data.playtime + 1;
+      //   wx.setStorage({
+      //     key: "playTime",
+      //     data: that.data.playtime
+      //   })
+      // }, 1000)
     },
     /***上一首*/
     songLeft: function (){
@@ -330,21 +347,22 @@ Page({
             return item
           })
         })
+        setTimeout(function () {
+          that.setData({
+            hiddenBf: true,
+            hiddenZt: false,
+            songIndex: pavIndex,
+            palys: true,
+            playtime: 0
+          })
+          app.globalData.musicSong = that.data.musicSong;
+          app.globalData.hiddenBf = that.data.hiddenBf;
+          app.globalData.hiddenZt = that.data.hiddenZt;
+          app.globalData.palys = that.data.palys;
+          app.globalData.songIndex = that.data.songIndex;
+          app.musicPaly(that.data.musicSong[0].url);
+        }, 300)
       });
-      
-      setTimeout(function(){
-        that.setData({
-          hiddenBf: true,
-          hiddenZt: false,
-          songIndex: pavIndex,
-          palys:true
-        })
-        that.musicPaly(that.data.musicSong[0].url);
-        app.globalData.musicSong = that.data.musicSong;
-        app.globalData.hiddenBf = that.data.hiddenBf;
-        app.globalData.hiddenZt = that.data.hiddenZt;
-        app.globalData.palys = that.data.palys;
-      },300)
       
     },
     /**
@@ -356,5 +374,51 @@ Page({
       var that = this;
       var id= e.currentTarget.dataset.id;
       this.palyClick(e,pavIndex,id);
-    }
+    },
+  /***
+* 监听播放顺序
+*/
+  onplays: function () {
+    var that = this;
+    app.globalData.backgroundAudioManager.onWaiting(function () {
+      that.setData({
+        hiddenBf: false,
+        hiddenZt: true
+      })
+      console.log("加载中")
+    })
+    app.globalData.backgroundAudioManager.onPlay(function () {
+      that.setData({
+        hiddenBf: false,
+        hiddenZt: true
+      })
+      console.log("开始播放")
+
+    });
+    app.globalData.backgroundAudioManager.onEnded(function () {
+      var pavIndex = that.data.songIndex + 1;
+      that.publicMusic(pavIndex)
+    });
+    app.globalData.backgroundAudioManager.onTimeUpdate(function () {
+      app.globalData.currentTime = app.globalData.backgroundAudioManager.currentTime;
+      app.globalData.duration = app.globalData.backgroundAudioManager.duration;
+    });
+    app.globalData.backgroundAudioManager.onError(function (err) {
+      console.log(err)
+    })
+    app.globalData.backgroundAudioManager.onPause(function () {
+      that.setData({
+        hiddenBf: true,
+        hiddenZt: false
+      })
+      console.log("暂停")
+    })
+    app.globalData.backgroundAudioManager.onStop(function () {
+      that.setData({
+        hiddenBf: true,
+        hiddenZt: false
+      })
+      console.log("停止")
+    })
+  },
 })

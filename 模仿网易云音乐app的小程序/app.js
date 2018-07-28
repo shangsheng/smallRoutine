@@ -1,4 +1,5 @@
 //app.js
+const backgroundAudioManager = wx.getBackgroundAudioManager()
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -33,6 +34,28 @@ App({
       }
     })
   },
+  /***
+   * 音乐播放
+   */
+  musicPaly:function(url){
+    var that = this;
+    // console.log(this)
+    backgroundAudioManager.src = url;
+    //本地存储播放的音乐
+    wx.setStorageSync("musicSong", this.globalData.musicSong);
+    backgroundAudioManager.title = this.globalData.musicSong[0].name;
+    backgroundAudioManager.singer = this.globalData.musicSong[0].author;
+    backgroundAudioManager.coverImgUrl = this.globalData.musicSong[0].imgUrl;
+    // console.log(typeof this.globalData.onplays)
+    if (typeof this.globalData.onplays == "function" && typeof this.globalData.onPalyMusic != "function" ){
+      this.globalData.onplays();
+    }else if(typeof this.globalData.onPalyMusic == "function"){
+      this.globalData.onPalyMusic();
+      // this.globalData.onplays();
+      console.log(this)
+    }
+    
+  },
   globalData: {
     userInfo: null,
     detail:{},
@@ -42,5 +65,11 @@ App({
     hiddenBf: true,
     hiddenZt: false,
     palys:false,
+    songIndex:0,
+    backgroundAudioManager: backgroundAudioManager,
+    onplays: "",
+    duration:"00:00",
+    currentTime:"00:00",
+    onPalyMusic:"",
   }
 })
