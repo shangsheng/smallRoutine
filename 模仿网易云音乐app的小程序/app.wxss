@@ -140,3 +140,193 @@
 .playscroll-ul-bottom{
   padding-bottom: 60px;
 }
+/* 专辑 */
+.special-ul{
+  background-color: #fafcfb;
+}
+.special-ul .special-li{
+  height: 40px;
+  border-bottom: 1px solid #eceeed;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.special-ul .special-li .special-left{
+  display: inline-block;
+  width: 60px;
+  height: 40px;
+  vertical-align: middle;
+  position: relative;
+}
+.special-ul .special-li .special-left .special-imgBgc{
+  width: 47px;
+  height: 40px;
+}
+.special-ul .special-li .special-left .special-img{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.special-ul .special-li .special-right{
+  display: inline-block;
+  vertical-align: middle;
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.special-ul .special-li .special-right .special-name{
+  font-size: 14px;
+  color: #2e302f;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.special-ul .special-li .special-right .special-time{
+  font-size: 10px;
+  color: #ccc;
+}
+/* 视频 */
+.frequency-ul{
+  background-color: #fafcfb;
+}
+.frequency-ul .freqyency-li{
+  height: 60px;
+  border-bottom: 1px solid #eceeed;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.frequency-ul .freqyency-li .freqyency-left{
+  display: inline-block;
+  height: 60px;
+  width: 100px;
+  position: relative;
+}
+.frequency-ul .freqyency-li .freqyency-left .freqyency-imgBgc{
+  width: 100px;
+  height: 60px;
+}
+.frequency-ul .freqyency-li .freqyency-left .freqyency-can{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.frequency-ul .freqyency-li .freqyency-left .freqyency-can .freqyency-img{
+  width: 14px;
+  height: 10px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.frequency-ul .freqyency-li .freqyency-left .freqyency-can text{
+  font-size: 12px;
+  color: #fff;
+}
+.frequency-ul .freqyency-li .frequency-right{
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  width: 60%;
+}
+.frequency-ul .freqyency-li .frequency-right .freqyency-mv{
+  font-size: 14px;
+  color: #666;
+}
+
+.frequency-ul .freqyency-li .frequency-right .freqyency-mv .imgMv{
+  width: 24px;
+  height: 10px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.frequency-ul .freqyency-li .frequency-right .frequency-time{
+  font-size: 12px;
+  color: #999;
+}
+/* 热门演唱 */
+  .playscroll-ul{
+
+}
+  .playscroll-ul .playscroll-li{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top:  1px solid #eeeeee;
+}
+  .playscroll-ul .playscroll-li .playName{
+  width: 80%;
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  box-sizing: border-box;
+}
+  .playscroll-ul .playscroll-li .playName .playimg{
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+  .playscroll-ul .playscroll-li .playName .item-num{
+  font-size: 14px;
+  color: #999999;
+  vertical-align: top;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+  .playscroll-ul .playscroll-li .playName .play-songName{
+  font-size: 14px;
+  color: #333333;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  box-sizing: border-box;
+}
+  .playscroll-ul .playscroll-li .playName .play-marginLeft{
+  margin-left: 26px;
+}
+  .playscroll-ul .playscroll-li .playName .play-songName .playSongName{
+  display: block;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+  .playscroll-ul .playscroll-li .playName .play-songName .playSongName text{
+  color: #999999;
+}
+  .playscroll-ul .playscroll-li .playName .play-songName .playAuthor{
+  font-size: 12px;
+  color: #888888;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  box-sizing: border-box;
+}
+  .playscroll-ul .playscroll-li .songMoer{
+  float: right;
+}
+  .playscroll-ul .playscroll-li .songMoer image{
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+}
+/* 歌词 */
+ .playinghidden{z-index:-1;opacity:0;pointer-events: none;}
+#lrclist{position: absolute;left: 30rpx;top:10rpx;right: 30rpx;bottom:260rpx;text-align: center;overflow: hidden;color: #fff;z-index: 3;}
+/* background-color: rgba(0,0,0,.1) */
+#lrcwrap{top:50%;position: absolute; font-size: 30rpx;width:100%; transition: all ease 1s;}
+#lrcwrap .lrcur{opacity: 1;font-size: 31rpx; transition: all ease 1s;}
+#lrcwrap .siblings1{opacity:.3}
+#lrcwrap .siblings2{opacity:.1;}
+#lrcwrap view{line-height:1.2; word-break: break-all;opacity: .5;height:72rpx;overflow: hidden;transition: all ease .5s; display: flex; align-items: center;width: 100%}
+#lrcwrap view text{display: block;text-align: center;width: 100%}
+#lrclist .cntloading{top:50%;position: relative;}
+#lrclist:after,#lrclist:before{content: "";position: absolute;left: 0;height:50%;top:0;
+ background-image: linear-gradient(rgba(0,0,0,1),rgba(0,0,0,.1)); opacity:.1;display:none;
+width:100%;z-index: 3;filter: brightness(.1)}
+#lrclist:after{top:auto;bottom:0;transform: rotate(180deg)}
+#lrclist .cntloading{position: absolute;top: 50%;color: #fff;width: 100%; margin-top: -16rpx;}

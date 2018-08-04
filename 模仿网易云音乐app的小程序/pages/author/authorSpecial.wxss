@@ -1,0 +1,219 @@
+/* pages/author/authorSpecial.wxss */
+.header{
+  height: 300px;
+  position: relative;
+}
+.header .header-bgc{
+  height: 300px;
+  width: 100%;
+}
+.header .header-item{
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  margin-left: -100px;
+  width: 200px;
+}
+.header .header-item .shoucang-item{
+  background-color: #f75644;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+.header .header-item .grzy-item{
+  display: inline-block;
+  padding: 0px 10px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  vertical-align: middle;
+  line-height: 20px;
+}
+.header .header-item .grzy-item image{
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  /* vertical-align: middle; */
+}
+.header .header-item .grzy-item text{
+  color: #fff;
+  font-size: 14px;
+}
+.content-prs{
+  background-color: #fff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 5px 10px;
+}
+.content-prs .prs-top{
+  height: 30px;
+}
+.content-prs .prs-top .prs-top-li{
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #646464;
+}
+.content-prs .prs-top .prs-li-color{
+  color: #f75644;
+}
+.content-prs .prs-top .prs-li-color text{
+  width: 40px;
+  height: 2px;
+  background-color: #f75644;
+  display: block;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+.content-prs  .prs-bottom{
+  padding-top: 5px;
+}
+.content-prs  .prs-bottom .prsHost-item{
+  height: 40px;
+}
+.content-prs  .prs-bottom .prsHost-item image{
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.content-prs  .prs-bottom .prsHost-item text{
+  color: #646464;
+  font-size: 14px;
+}
+/* 艺人信息 */
+.information{
+  padding: 5px 0;
+}
+.information .information-jianjie{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.information .information-jianjie .information-content{
+  font-size: 12px;
+  color: #7a7c7b;
+}
+.information .information-name{
+  font-size: 14px;
+  color: #646464;
+  margin-bottom: 10px;
+}
+.information .information-zhuanlan{
+  /* height: 60px; */
+}
+.information .information-zhuanlan image{
+  width: 100px;
+  height: 60px;
+}
+.information .information-zhuanlan .information-wenzhang{
+  display: inline-block;
+  vertical-align: top;
+  width: 62%;
+  margin-left: 10px;
+}
+.information .information-zhuanlan .information-wenzhang .information-title{
+  display: block;
+  color: #646464;
+  font-size: 14px;
+}
+.information .information-zhuanlan .information-wenzhang  .information-see{
+  font-size: 12px;
+  color: #7a7c7b;
+}
+.information-conform{
+  width: 100%;
+}
+.information-conform .information-ul{
+  white-space: nowrap;
+  height: 60px;
+}
+.information-conform .information-ul .information-li{
+  float: left;
+  padding: 5px;
+}
+.information-conform .information-ul .information-li image{
+  width: 40px;
+  height: 40px;
+}
+.information-conform .information-ul .information-li text{
+  font-size: 12px;
+  color: #7a7c7b;
+}
+.information-quanbu{
+  text-align: center;
+  font-size: 12px;
+  color: #ccc;
+  padding-top: 10px;
+}
+ .item-list  .playscroll-ul .playscroll-li{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top:  1px solid #eeeeee;
+}
+.item-list  .playscroll-ul .playscroll-li .playName{
+  width: 80%;
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  box-sizing: border-box;
+}
+.item-list  .playscroll-ul .playscroll-li .playName .playimg{
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.item-list  .playscroll-ul .playscroll-li .playName .item-num{
+  font-size: 14px;
+  color: #999999;
+  vertical-align: top;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+.item-list  .playscroll-ul .playscroll-li .playName .play-songName{
+  font-size: 14px;
+  color: #333333;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  box-sizing: border-box;
+}
+.item-list  .playscroll-ul .playscroll-li .playName .play-marginLeft{
+  margin-left: 26px;
+}
+.item-list  .playscroll-ul .playscroll-li .playName .play-songName .playSongName{
+  display: block;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+.item-list  .playscroll-ul .playscroll-li .playName .play-songName .playSongName text{
+  color: #999999;
+}
+.item-list  .playscroll-ul .playscroll-li .playName .play-songName .playAuthor{
+  font-size: 12px;
+  color: #888888;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  box-sizing: border-box;
+}
+.item-list  .playscroll-ul .playscroll-li .songMoer{
+  float: right;
+}
+.item-list  .playscroll-ul .playscroll-li .songMoer image{
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+}
+.tab-content swiper-item{
+  overflow: auto;
+}

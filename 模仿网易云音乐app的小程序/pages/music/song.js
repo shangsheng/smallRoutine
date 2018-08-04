@@ -35,6 +35,9 @@ let defaultdata ={
   playSong:[],
   privileges:[],
   lrc:[],
+  lrcindex: 0,
+  showlrc: false,
+  disable: false,
   downloadPercent:0,//下载个数
   commentscount:0,//相似列表
   innerAudioContext:{},//全局的播放器
@@ -43,7 +46,9 @@ let defaultdata ={
   prevPage:{},
   actionListHidden:true,
   mode: {},
-  modeIndex:0
+  modeIndex:0,
+  actionSheetHidden:true,
+  moreSpecial:{} 
 }
 // const backgroundAudioManager = wx.getBackgroundAudioManager();
 Page({
@@ -107,7 +112,7 @@ Page({
     var prevPage = pages[pages.length - 2];  //上一个页面
     this.data.prevPage = prevPage;
     var urlRoute = ".." + prevPage.route.substring(5);
-    console.log(prevPage)
+    console.log(this)
     this.onPalyMusic();
     // this.musicTime();
     app.globalData.onPalyMusic = this.onPalyMusic;
@@ -117,7 +122,7 @@ Page({
     // })
     this.setData({
       mode: modeArr[1],
-      modeIndex: 1
+      modeIndex: 2
     })
   },
 
@@ -125,21 +130,82 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this;
+    var s = 0;
+    var m = 0;
+    var item;
+    var Time = (function () {
+      m = Math.floor(app.globalData.duration / 60);
+      s = Math.ceil(app.globalData.duration - m * 60);
+      if (m > 9) {
+        m = m;
+      } else {
+        m = "0" + m;
+      }
+      if (s > 9) {
+        s = s;
+      } else {
+        s = "0" + s;
+      }
+      item = m + ":" + s;
+      return item;
+    })();
+    seek = setInterval(function () {
+      wx.getBackgroundAudioPlayerState({
+        complete: function (res) {
+          var time = 0, lrcindex = that.data.lrcindex, playing = false;
+          if (res.status != 2 && that.data.lrc.lrc) {
+           
+            if (that.data.showlrc && !that.data.lrc.lrc.scroll) {
+              for (let i in that.data.lrc.lrc.now_lrc) {
+                var se = that.data.lrc.lrc.now_lrc[i];
+                if (se.lrc_sec <= res.currentPosition) {
+                  lrcindex = i
+                }
+              }
+            };
 
+          }else{
+            //  that.data.lrc.lrc=true;
+          } if (res.status == 1) {
+            playing = true;
+          }
+          that.setData({
+            
+            lrcindex: lrcindex,
+         
+          })
+        }
+      });
+    },1000)
+    this.setData({
+      hiddenBf: app.globalData.hiddenBf,
+      hiddenZt: app.globalData.hiddenZt,
+      music: app.globalData.musicSong,
+      playSong: app.globalData.playSong,
+      privileges: app.globalData.privileges,
+      detail: app.globalData.detail,
+      palys: app.globalData.palys,
+      radius: app.globalData.palys,
+      songIndex: app.globalData.songIndex,
+      durationTime: Time
+    })
+    app.globalData.onPalyMusic = this.onPalyMusic;
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    clearInterval(seek)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    clearInterval(seek)
+    app.globalData.onPalyMusic="";
   },
 
   /**
@@ -200,18 +266,8 @@ Page({
    */
   onPalyMusic:function(){
     let that = this;
-    
     app.globalData.backgroundAudioManager.onEnded(()=>{
       console.log(app)
-        // that.setData({
-        //   music: app.globalData.musicSong,
-        //   palys: app.globalData.palys,
-        //   radius: app.globalData.palys,
-        //   hiddenBf: false,
-        //   hiddenZt: true,
-        //   songIndex: ,
-        //   tiems:0
-        // })
         if(that.data.modeIndex ==2){
           that.data.songIndex = app.globalData.songIndex + 1;
           that.publicMusic(that.data.songIndex);
@@ -221,7 +277,8 @@ Page({
         }else if(that.data.modeIndex == 1){
           app.musicPaly(that.data.music[0].url);
         }
-        that.gclycri(that.data.playSong[that.data.songIndex].al.id);
+        that.data.songIndex=0;
+        that.gclycri(that.data.playSong[that.data.songIndex].privilege.id);
     })
     app.globalData.backgroundAudioManager.onWaiting(function () {
       that.setData({
@@ -270,6 +327,7 @@ Page({
       app.globalData.currentTime = app.globalData.backgroundAudioManager.currentTime;
       app.globalData.duration = app.globalData.backgroundAudioManager.duration;
       that.musicTime();
+     
     });
     app.globalData.backgroundAudioManager.onError(function (err) {
       console.log(err)
@@ -313,10 +371,20 @@ Page({
   gclycri:function(id){
     var that = this;
     var lycriUrl = bsurl._lyric + "?id=" + id;
+    var lrcindex = that.data.lrcindex;
     util.fetchGet(lycriUrl,function(err,res){
       console.log(res)
+      if(res.lrc){
+        res.lrc = util.parse_lrc(res.lrc.lyric)
+        that.setData({
+          lrc:res
+        })
+      }else{
+        that.setData({
+          lrc:res
+        })
+      }
     })
-   
   },
   /***
    * 时间显示
@@ -419,8 +487,34 @@ Page({
      * 公共的请求音乐类
      */
   publicMusic: function (pavIndex) {
-
     var that = this;
+    console.log(pavIndex)
+    console.log(this)
+    if(pavIndex === this.data.playSong.length){
+      that.setData({
+        hiddenBf: true,
+        hiddenZt: false,
+        songIndex: 0,
+        palys: true,
+        playtime: "00:00"
+      })
+      that.data.prevPage.setData({
+        hiddenBf: true,
+        hiddenZt: false,
+        songIndex: 0,
+        palys: true,
+        musicSong: that.data.music,
+        playSong: that.data.playSong
+      })
+      app.globalData.musicSong = that.data.music;
+      app.globalData.hiddenBf = that.data.hiddenBf;
+      app.globalData.hiddenZt = that.data.hiddenZt;
+      app.globalData.palys = that.data.palys;
+      app.globalData.songIndex = that.data.songIndex;
+      app.globalData.playSong = that.data.playSong;
+      app.publicMusic(0);
+      that.gclycri(that.data.playSong[0].privilege.id);
+    }else{
     var id = that.data.playSong[pavIndex].privilege.id;
     var urlSong = bsurl._musicUrl + "?id=" + id;
     //获取歌曲的演唱歌手名字
@@ -446,11 +540,11 @@ Page({
           return item
         }),
         music: res.data.map(function (item) {
-
+         
           item.name = that.data.playSong[pavIndex].name;
           item.author = arName;
           item.imgUrl = that.data.playSong[pavIndex].al.picUrl;
-          return item
+          return item;
         })
       })
       // setTimeout(function () {
@@ -459,7 +553,9 @@ Page({
           hiddenZt: false,
           songIndex: pavIndex,
           palys: true,
-          playtime: "00:00"
+          playtime: "00:00",
+          moreSpecial: that.DataUpdate(),
+          songIndex:0
         })
       that.data.prevPage.setData({
         hiddenBf: true,
@@ -474,11 +570,13 @@ Page({
         app.globalData.hiddenZt = that.data.hiddenZt;
         app.globalData.palys = that.data.palys;
         app.globalData.songIndex = that.data.songIndex;
+        app.globalData.playSong = that.data.playSong;
         app.musicPaly(that.data.music[0].url);
       // }, 300)
-      console.log(that)
+      // console.log(that)
+      that.gclycri(that.data.playSong[pavIndex].privilege.id);
     });
-
+    }
   },
   /***上一首*/
   songLeft: function () {
@@ -487,7 +585,6 @@ Page({
     if (pavIndex >= 0) {
       that.publicMusic(pavIndex);
     }
-
   },
   /**
    * 下一首
@@ -495,8 +592,11 @@ Page({
   songRight: function () {
     var pavIndex = this.data.songIndex + 1;
     var that = this;
-    that.publicMusic(pavIndex);
-
+    if (pavIndex == this.data.playSong.length) {
+      pavIndex = 0;
+    } else {
+      that.publicMusic(pavIndex);
+    }
   },
   // 列表
   actionSheetChange:function(){
@@ -568,7 +668,7 @@ Page({
       })
       console.log(_that.data.music[0])
       setTimeout(function () {
-        _that.setData({  songIndex: index })
+        _that.setData({ songIndex: index, songIndex:0 })
         app.globalData.onplays = _that.onplays;
         app.globalData.songIndex = index;
         app.globalData.musicSong = _that.data.music;
@@ -582,6 +682,7 @@ Page({
           musicSong: _that.data.music,
           playSong: _that.data.playSong
         })
+        _that.gclycri(_that.data.playSong[index].privilege.id);
       }, 300);
     });
     
@@ -675,5 +776,64 @@ Page({
         })
       },3000)
     }
-  } 
+  },
+  /**
+   * 更多操作
+   * */ 
+  moreOperations:function(){
+    var that = this;
+    this.setData({
+      actionSheetHidden:false,
+      moreSpecial: that.DataUpdate()
+    })
+  },
+  actionspecialChange:function(){
+    this.setData({
+      actionSheetHidden: true
+    })
+  },
+/**
+ * 数据更新函数
+ */
+DataUpdate:function(){
+  var that = this;
+  var specialArr = {};
+  for (var i = 0; i < this.data.playSong.length; i++) {
+    if (that.data.music[0].id === this.data.playSong[i].id) {
+      specialArr = this.data.playSong[i];
+    }
+  }
+  return specialArr;
+},
+/**
+ * 隐藏歌词和显示歌词
+ * */ 
+ loadlrc:function(){
+   this.setData({
+     showlrc:false
+   })
+ },
+ loadlrcTrue:function(){
+   this.setData({
+     showlrc: true
+   })
+ },
+ /**
+  * 跳转页面
+  */
+  authorPaver:function(e){
+    console.log(e)
+    var id = e.currentTarget.id;
+    var limit = e.currentTarget.dataset.limit;
+    console.log(limit)
+    if (!limit){
+      wx.redirectTo({
+        url: "/pages/author/authorSpecial?id="+id,
+      })
+    }else{
+      wx.redirectTo({
+        url: '/pages/artist/album?id='+id+"&limit="+limit,
+      })
+    }
+  }
 })

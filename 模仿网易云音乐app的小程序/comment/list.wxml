@@ -41,3 +41,22 @@
     </block>
   </view>
  </template>
+ <template name="recommendGenre">
+  <view class='index-list-item clearfix'>
+    <block wx:for="{{recommendIndex}}" wx:key="">
+      <view class='index-list' data-listId="{{item.id}}">
+        <navigator url='/pages/playlist/detail?id={{item.id}}'>
+          <image src="{{item.coverImgUrl}}" class='list-item-img'></image>
+          <view class='earCup'><image src='../../images/p0.png'></image><text>{{item.playCount}}</text></view>
+          <view class='genre-name'>
+            <image src='../../images/cm2_btm_icn_account_prs.png'></image>
+            <text>{{item.creator.nickname}}</text>
+            <image src='../../images/s_.png' hidden='{{item.ordered}}'></image>
+            <image src='../../images/ry.png' hidden='{{item.trackCount}} == "50"?"false":"true"'></image>
+          </view>
+          <view class='index-abstract'>{{item.name}}</view>
+        </navigator>
+      </view>
+    </block>
+  </view>
+ </template>

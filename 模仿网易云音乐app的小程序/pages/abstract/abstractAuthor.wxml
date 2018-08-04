@@ -1,0 +1,5 @@
+<!--pages/abstract/abstractAuthor.wxml-->
+<import src="../../comment/abstract.wxml"/>
+<view class='tankuangjianjie'>
+  <template is="abstract" data="{{abstractArtists:abstractArtists}}"/>
+</view>

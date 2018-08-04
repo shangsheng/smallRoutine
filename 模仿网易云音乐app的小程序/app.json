@@ -10,7 +10,11 @@
     "pages/ranking/index",
     "pages/playlist/detail",
     "pages/album/album",
-    "pages/music/song"
+    "pages/music/song",
+    "pages/author/authorSpecial",
+    "pages/artist/album",
+    "pages/abstract/abstractAuthor",
+    "pages/catlistAll/catlistAll"
   ],
   "window":{
     "backgroundTextStyle":"light",

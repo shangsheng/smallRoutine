@@ -306,7 +306,11 @@ Page({
     songRight: function (){
         var pavIndex = this.data.songIndex + 1;
         var that = this;
-          that.publicMusic(pavIndex);
+      if (pavIndex == this.data.playSong.length) {
+        pavIndex = 0;
+      } else {
+        that.publicMusic(pavIndex);
+      }
         
     },
     /***
@@ -315,6 +319,29 @@ Page({
     publicMusic: function (pavIndex){
       
       var that = this;
+      if (pavIndex === this.data.playSong.length) {
+        that.setData({
+          hiddenBf: true,
+          hiddenZt: false,
+          songIndex: 0,
+          palys: true,
+          playtime: "00:00"
+        })
+        that.data.prevPage.setData({
+          hiddenBf: true,
+          hiddenZt: false,
+          songIndex: 0,
+          palys: true,
+          musicSong: that.data.music,
+          playSong: that.data.playSong
+        })
+        app.globalData.musicSong = that.data.music;
+        app.globalData.hiddenBf = that.data.hiddenBf;
+        app.globalData.hiddenZt = that.data.hiddenZt;
+        app.globalData.palys = that.data.palys;
+        app.globalData.songIndex = that.data.songIndex;
+        app.publicMusic(0);
+      } else {
       var id = that.data.privileges[pavIndex].id;
       var urlSong = api._musicUrl + "?id=" + id;
       //获取歌曲的演唱歌手名字
@@ -363,7 +390,7 @@ Page({
           app.musicPaly(that.data.musicSong[0].url);
         }, 300)
       });
-      
+      }
     },
     /**
      * 全部播放
@@ -405,6 +432,15 @@ Page({
     });
     app.globalData.backgroundAudioManager.onError(function (err) {
       console.log(err)
+      that.setData({
+        hiddenBf: true,
+        hiddenZt: false,
+        palys: false
+      })
+      console.log("暂停")
+      app.globalData.hiddenBf = that.data.hiddenBf;
+      app.globalData.hiddenZt = that.data.hiddenZt;
+      app.globalData.palys = that.data.palys;
     })
     app.globalData.backgroundAudioManager.onPause(function () {
       that.setData({

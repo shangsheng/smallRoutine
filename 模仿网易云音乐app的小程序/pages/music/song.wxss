@@ -301,3 +301,66 @@
   width: 18px;
   height: 18px;
 }
+/* 更多操作 */
+.moreTop{
+  height: 40px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+}
+.moreTop .moreLeft{
+  float: left;
+  width: 70%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.moreTop .moreLeft .moreSongName{
+  font-size: 14px;
+  color: #666;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.moreTop .moreLeft .moreText{
+  font-size: 12px;
+  color: #999;
+}
+.moreTop .moreRight{
+  float: right;
+}
+.moreTop .moreRight text{
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #d33a31;
+  color: #d33a31;
+  border-radius: 10px;
+}
+.moreItem{
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+.moreItem image{
+  width: 36px;
+  height: 36px;
+  vertical-align: middle;
+}
+.moreItem text{
+  font-size: 14px;
+  color: #666;
+  vertical-align: middle;
+}
+.moreItem .x2{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+/* 歌词 */
+/* .songLyric{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+} */

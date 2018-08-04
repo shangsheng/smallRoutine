@@ -1,0 +1,10 @@
+/* pages/abstract/abstractAuthor.wxss */
+.abstractName {
+  color: #666;
+}
+.tankuangjianjie {
+  position: static;
+}
+.abstractLabel,.abstractList .abstractLeft,.abstractList .abstractRight {
+  color: #666;
+}

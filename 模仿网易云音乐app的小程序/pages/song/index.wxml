@@ -1,2 +1,32 @@
 <!--pages/song/index.wxml-->
-<text>pages/song/index.wxml</text>
+<import src="../../comment/list.wxml" />
+<pages>
+  <view class='songTop'>
+    <view class='song-list'>
+      <image src='{{boutiqueSong[0].coverImgUrl}}' class='songImg'></image>
+      <view class='song-right'>
+        <view class='songName'>精品歌单 <text>></text></view>
+        <view class='songAbstract'>
+          <text class='songtitle'>{{boutiqueSong[0].name}}</text>
+          <text>{{boutiqueSong[0].copywriter}}</text>
+        </view>
+      </view>
+    </view>
+    <image src='{{boutiqueSong[0].coverImgUrl}}' class='songBgcImg'></image>
+  </view>
+  <view class='songBottom'>
+    <view class='songBottom-genre'>
+      <view class='genre-left' wx:if="{{allTrue}}"><navigator url='/pages/catlistAll/catlistAll'><text>{{cat}} ></text></navigator></view>
+      <view class='genre-left' wx:else><navigator url='/pages/catlistAll/catlistAll'><text>{{catlistAll.sub[allIndex].name}} ></text></navigator></view>
+      <view class='genre-right'>
+        <text bindtap='catSong' data-cat='华语'>华语</text> | <text bindtap='catSong' data-cat='民谣'>民谣</text> | <text bindtap='catSong' data-cat='摇滚'>摇滚</text>
+      </view>
+    </view>
+    <view class='songBoottom-item'>
+         <template is="recommendGenre" data="{{recommendIndex:recommendIndex}}"/>
+    </view>
+  </view>
+</pages>
+<loading class="loading" hidden="{{hidden}}">
+  <text class="loading-font">加载中...</text>
+</loading>

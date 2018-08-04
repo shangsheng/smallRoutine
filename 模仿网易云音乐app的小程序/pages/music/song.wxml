@@ -1,5 +1,6 @@
+<import src="../../comment/lyc.wxml" />
 <view class="musicDisc">
-  <view class='musicDisc-top'>
+  <view class='musicDisc-top' bindtap='loadlrcTrue'>
     <image src='../../images/aag.png' class='musicDisc-img-l {{ palys ? "plays" : ""}}'></image>
     <view class='discImg'>
       <image src='../../images/play.png' class='imgBgc'></image>
@@ -19,7 +20,7 @@
        <image src='../../images/a_f.png' class='pinglu2' hidden='{{af}}'></image>
        <text hidden='{{af}}'>{{commentscount}}</text>
        </view> 
-      <image src='../../images/a_x.png' class='liebiao'></image>
+      <image src='../../images/a_x.png' class='liebiao' catchtap='moreOperations'></image>
     </view>
     <view class='jindutiao'>
       <text class='kaishi'>{{playtime}}</text>
@@ -42,7 +43,7 @@
          <image src='../../images/ajf.png' catchtap='songZt' hidden='{{hiddenZt}}'></image> 
         <image src='../../images/ajh.png' catchtap='songRight'></image>
       </view>
-      <image src='../../images/aab.png' class='liebiao1' bindtap='actionLie'></image>
+      <image src='../../images/aab.png' class='liebiao1' catchtap='actionLie'></image>
     </view>
   </view>
   <image class='musicBgcImg' src='{{music[0].imgUrl}}'></image>
@@ -82,3 +83,35 @@
       </view>
     </view>
   </view>
+  <!-- 更多操作 -->
+  <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionspecialChange">
+    <view class='moreTop'>
+      <view class='moreLeft'>
+        <view class='moreSongName'>歌曲:{{moreSpecial.name}}</view>
+        <view class='moreText'>该歌曲开通VIP即可畅享</view>
+      </view>
+      <view class='moreRight'>
+        <text>开通VIP</text>
+      </view>
+    </view>
+      <action-sheet-item class="moreItem" bindtap="authorPaver" id="{{moreSpecial.ar[0].id}}">
+        <image src='/images/a5j.png'></image>
+        <text>歌手:{{moreSpecial.ar[0].name}}</text>
+      </action-sheet-item>
+      <action-sheet-item class="moreItem" bindtap="authorPaver" id="{{moreSpecial.al.id}}" data-limit="30">
+        <image src='/images/cm2_discover_icn_newest@2x.png' class='x2'></image>
+        <text>专辑:{{moreSpecial.al.name}}</text>
+      </action-sheet-item>
+      <action-sheet-item class="moreItem" catchtap="changeSort3">
+        <image src='/images/cm2_discover_icn_mv@2x.png' class='x2'></image>
+        <text>查看视频</text>
+      </action-sheet-item>
+      <action-sheet-item class="moreItem" catchtap="changeSort4">
+        <image src='/images/a5s.png'></image>
+        <text>定时停止播放</text>
+      </action-sheet-item>
+  </action-sheet>
+  <!-- 歌词 -->
+  <!-- <view class='songLyric'> -->
+        <template is="lrc" data="{{lrc:lrc,showlrc:showlrc,lrcindex:lrcindex}}" />
+  <!-- </view> -->

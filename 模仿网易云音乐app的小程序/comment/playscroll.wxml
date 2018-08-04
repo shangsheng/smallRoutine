@@ -1,6 +1,6 @@
 <template name="playscroll">
   <view class='playscroll-ul'>
-    <scroll-view scroll-y style="height: 100%;">
+    <scroll-view scroll-y style="height: 100%;" >
     <block wx:for="{{playSong}}" wx:key="">
      <view class='playscroll-li'>
       <view class='playName' catchtap='palyClick' data-index="{{index}}" id="{{item.id}}">
@@ -21,5 +21,51 @@
     </view>
     </block>
   </scroll-view>
+  </view>
+</template>
+
+<template name="special">
+  <view class='special-ul'>
+    <scroll-view scroll-y style='height:100%'>
+      <block wx:for="{{special}}">
+        <view class='special-li' >
+         <navigator url='/pages/artist/album?id={{item.id}}'>
+           <view class='special-left'>
+            <image class='special-imgBgc' src='/images/a6l.png'></image>
+            <image class='special-img' src='{{item.picUrl}}'></image>
+          </view>
+          <view class='special-right'>
+            <text class='special-name'>{{item.name}}</text>
+            <text class='special-time'>{{item.publishTime}}{{item.artist.name}}</text>
+          </view>
+         </navigator>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</template>
+
+<template name="visualFrequency">
+  <view class='frequency-ul'>
+    <scroll-view scroll-y style='height:100%'>
+      <block wx:for="{{visualFrequency}}" wx:key="">
+        <view class='freqyency-li' >
+          <view class='freqyency-left'>
+            <image class='freqyency-imgBgc' src='{{item.imgurl}}'></image>
+            <view class='freqyency-can'>
+               <image class='freqyency-img' src='/images/video.png'></image>
+               <text>{{item.playCount}}</text>
+            </view>
+          </view>
+          <view class='frequency-right'>
+            <view class='freqyency-mv'>
+              <image class='imgMv' src='/images/l0.png'></image>
+              <text class='frequency-name'>{{item.name}}</text>
+            </view>
+            <text class='frequency-time'>{{item.publishTime}}</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
   </view>
 </template>

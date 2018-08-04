@@ -1,0 +1,17 @@
+<!--pages/catlistAll/catlistAll.wxml-->
+<pages>
+  <view class='pages'>
+    <view class='catilstAll {{storageCatlist.all.borderHidden?"catilstborder":""}}' data-cat="{{storageCatlist.all.name}}" bindtap='catilstCat'>{{storageCatlist.all.name}}</view>
+    <view class='catilst'>
+      <block wx:for="{{catlistAll}}" wx:key="">
+        <view class='catilst-ul' data-index='{{index}}'>
+          <view class='catilst-li catilst-categories'>{{categories[index]}}</view>
+          <block wx:for="{{item}}" wx:key="">
+            <view class='catilst-li {{item.borderHidden?"catilstborder":""}}' data-cat="{{item.name}}" bindtap='catilstCat'>{{item.name}}</view>
+          </block>
+            <view class='clearfix'></view>
+        </view>
+      </block>
+    </view>
+  </view>
+</pages>

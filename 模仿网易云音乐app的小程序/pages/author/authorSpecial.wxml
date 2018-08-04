@@ -1,0 +1,100 @@
+<!--pages/author/authorSpecial.wxml-->
+<import src="../../comment/playscroll.wxml" />
+<import src="../../comment/musicList.wxml" />
+<pages>
+  <view class='header'>
+    <view class='header-item'>
+      <text class='shoucang-item'>+ 收藏</text>
+      <view class='grzy-item'> <image src='/images/cm2_btm_icn_account_prs.png'></image> <text>个人主页</text></view>
+    </view>
+    <image src='{{dataile.picUrl}}' class='header-bgc'></image>
+  </view>
+  <view class='content-prs'>
+    <view class='content-hostSong'>
+      <view class='prs-top'>
+        <view class='prs-top-li {{currentTab==0?"prs-li-color":""}} ' id='{{dataile.id}}' data-content="0" catchtap='songPrs'>
+          热门演唱
+          <text></text>
+        </view>
+        <view class='prs-top-li {{currentTab==1?"prs-li-color":""}}' id='{{dataile.id}}' data-content="1" catchtap='songPrs'>
+          专辑
+          <text></text>
+        </view>
+        <view class='prs-top-li {{currentTab==2?"prs-li-color":""}}' id='{{dataile.id}}' data-content="2" catchtap='songPrs'>
+          视频
+          <text></text>
+        </view>
+        <view class='prs-top-li {{currentTab==3?"prs-li-color":""}}' id='{{dataile.id}}' data-content="3" catchtap='songPrs'>
+          艺人信息
+          <text></text>
+        </view>
+      </view>
+    </view>
+    <swiper duration="300" current="{{currentTab}}"  class="tab-content" bindchange="switchTab" style="height:{{winHeight}}rpx">
+        <swiper-item>
+          <view class='prs-bottom'>
+            <view class='prsHost-item'>
+              <image src='/images/w79f7.png'></image>
+              <text>收藏热门{{playSong.length}}单曲</text>
+            </view>
+            <view class='item-list {{songlist?"":"playscroll-ul-bottom"}}'>
+              <template is="playscroll" data="{{playSong:playSong}}" />
+            </view>
+          </view>
+        </swiper-item>
+        <swiper-item>
+          <view class='special {{songlist?"":"playscroll-ul-bottom"}}'>
+            <template is= "special" data="{{special:special}}" />
+          </view>
+        </swiper-item>
+        <swiper-item>
+          <view class='visualFrequency {{songlist?"":"playscroll-ul-bottom"}}'>
+            <view class='visual-top'>
+              <text>全部（共{{visualFrequency.length}}个）</text>
+            </view>
+            <template is="visualFrequency" data="{{visualFrequency:visualFrequency}}" />
+          </view>
+        </swiper-item>
+        <swiper-item>
+           <!-- 艺人信息 -->
+          <view class='information'>
+            <view class='information-jianjie'>
+              <view class='information-name'>{{dataile.name}}简介</view>
+              <view class='information-content'>{{yirexinxi.briefDesc}}</view>
+              <view class='information-quanbu' hidden='{{yirexinxi.introduction?false:true}}'><navigator url='/pages/abstract/abstractAuthor'>完整歌手介绍></navigator></view>
+            </view>
+            <view class='information-name' hidden='{{yirexinxi.readCount?false:true}}'>先关专栏文章</view>
+            <block wx:for="{{yirexinxi.topicData}}" wx:key="">
+              <view class='information-zhuanlan'>
+                <image src='{{item.coverUrl}}'></image>
+                <view class='information-wenzhang'>
+                  <text class='information-title'>{{item.mainTitle}}</text>
+                  <text class='information-see'>{{item.creator.nickname}}阅读:{{item.readCount}}</text>
+                </view>
+              </view>
+            </block>
+            <view class='information-name'>相似歌手</view>
+            <view class='information-conform'>
+              <view class='information-ul'>
+               <scroll-view scroll-x style="width: 100%;">
+                <block wx:for="{{conform }}" wx:key="">
+                  <view class='information-li'>
+                    <image src=''></image>
+                    <text></text>
+                  </view>
+                </block>
+                </scroll-view>
+              </view>
+            </view>
+          </view>
+        </swiper-item>
+    </swiper>
+  </view>
+  <!-- 底部播放列表 -->
+<view class='songList' hidden='{{songlist}}'>
+  <template is="musicSong" data="{{musicSong:musicSong,hiddenBf:hiddenBf,hiddenZt:hiddenZt}}"/>
+</view>
+<loading class="loading" hidden="{{hidden}}">
+  <text class="loading-font">加载中...</text>
+</loading>
+</pages>

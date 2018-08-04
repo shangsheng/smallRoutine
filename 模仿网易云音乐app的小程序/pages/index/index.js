@@ -20,6 +20,7 @@ Page({
     this.djprogram();
     wx.setStorageSync("detail", "");
     wx.setStorageSync("musicSong", "");
+    wx.setStorageSync("yirexinxi", "");
   },
   // banner
   banner:function(e){

@@ -40,21 +40,26 @@ App({
   musicPaly:function(url){
     var that = this;
     // console.log(this)
-    backgroundAudioManager.src = url;
-    //本地存储播放的音乐
-    wx.setStorageSync("musicSong", this.globalData.musicSong);
-    backgroundAudioManager.title = this.globalData.musicSong[0].name;
-    backgroundAudioManager.singer = this.globalData.musicSong[0].author;
-    backgroundAudioManager.coverImgUrl = this.globalData.musicSong[0].imgUrl;
-    // console.log(typeof this.globalData.onplays)
-    if (typeof this.globalData.onplays == "function" && typeof this.globalData.onPalyMusic != "function" ){
-      this.globalData.onplays();
-    }else if(typeof this.globalData.onPalyMusic == "function"){
-      this.globalData.onPalyMusic();
-      // this.globalData.onplays();
-      console.log(this)
+    if (backgroundAudioManager.src == "null") { that.globalData.songIndex = that.globalData.songIndex+1 }else{
+      backgroundAudioManager.src = url;
     }
-    
+      //本地存储播放的音乐
+      wx.setStorageSync("musicSong", this.globalData.musicSong);
+      backgroundAudioManager.title = this.globalData.musicSong[0].name;
+      backgroundAudioManager.singer = this.globalData.musicSong[0].author;
+      backgroundAudioManager.coverImgUrl = this.globalData.musicSong[0].imgUrl;
+      // console.log(typeof this.globalData.onplays)
+      if (typeof this.globalData.onplays == "function" && typeof this.globalData.onPalyMusic != "function") {
+        this.globalData.onplays();
+        console.log(1)
+      } else if (typeof this.globalData.onPalyMusic == "function" && typeof this.globalData.onplaySpecial != "function") {
+        this.globalData.onPalyMusic();
+        // this.globalData.onplays();
+        console.log(2)
+      } else if (typeof this.globalData.onplaySpecial == "function"){
+        this.globalData.onplaySpecial();
+        console.log(3)
+      }
   },
   globalData: {
     userInfo: null,
@@ -71,5 +76,6 @@ App({
     duration:"00:00",
     currentTime:"00:00",
     onPalyMusic:"",
+    onplaySpecial:"",
   }
 })

@@ -1,3 +1,4 @@
+/* pages/album/album.wxss */
 /* pages/playlist/detail.wxss */
 .playlist{
   /* padding-left: 10px;
@@ -13,7 +14,9 @@
   padding-left: 10px;
   padding-right: 10px;
   position: relative;
+  padding-bottom: 10px;
   background-color:rgba(0,0,0,0.2);
+
 }
 .playlistTop .playlistBgc{
   position: absolute;
@@ -35,12 +38,23 @@
 .playlistTop .playlist-rnd-top .palylist-top-img{
   display: inline-block;
   width: 130px;
-  height: 130px;
+  height: 110px;
   position: relative;
 }
 .playlistTop .playlist-rnd-top .palylist-top-img .imgName{
+  width: 110px;
+  height: 110px;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 1;
+}
+.playlistTop .playlist-rnd-top .palylist-top-img .imgNameBgc{
   width: 130px;
-  height: 130px;
+  height: 110px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .playlistTop .playlist-rnd-top .palylist-top-img .playlist-number{
   position: absolute;
@@ -53,9 +67,10 @@
 .playlistTop .playlist-rnd-top .palylist-top-img .i-p{
   position: absolute;
   bottom: 0;
-  right: 4px;
+  right: 20px;
   width: 23px;
   height: 23px;
+  z-index: 10;
 }
 .playlistTop .playlist-rnd-top .palylist-top-img .playlist-number image{
   width: 12px;
@@ -88,6 +103,8 @@
 .playlistTop .playlist-rnd-top .playlist-top-name .playlist-top-name-img text{
   color: #fff;
   font-size: 12px;
+  display: block;
+  margin-bottom: 5px;
 }
 .playlistTop .playlist-tab{
   margin-top: 10px;
@@ -111,7 +128,7 @@
   padding-left: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background-color: #f0f4f3;
+  background-color: #fff;
 }
 .playlist-bottom .playlistBotomTop{
   padding-bottom: 10px;

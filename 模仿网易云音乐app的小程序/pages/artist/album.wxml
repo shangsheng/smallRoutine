@@ -1,0 +1,66 @@
+<!--pages/playlist/detail.wxml-->
+<import src="../../comment/playscroll.wxml" />
+<import src="../../comment/abstract.wxml"/>
+<import src="../../comment/musicList.wxml"/>
+<view class='playlist'>
+  <view class='playlistTop'>
+    <view class='playlist-rnd-top' data-id='{{detail.artist.id}}' bindtap='abstracts'>
+      <view class='palylist-top-img'>
+        <image src='{{detail.picUrl}}' class='imgName'></image>
+        <image src='{{logo.imgBgc}}' class='imgNameBgc'></image>
+        <image class='i-p' src='{{logo.i}}'></image>
+      </view>
+      <view class='playlist-top-name'>
+        <view class='playlist-top-title'>{{detail.artist.briefDesc}}</view>
+        <view class='playlist-top-name-img'>
+          <text>歌手:{{detail.artist.name}} ></text>
+          <text>发布时间:{{detail.artist.publishTime}}</text>
+        </view>
+      </view>
+    </view>
+    <image class='playlistBgc' src='{{detail.blurPicUrl}}'></image>
+    <view class='playlist-tab'>
+      <view class='playlist-li'>
+        <image src='{{logo.w3}}'></image>
+        <text>{{detail.info.commentCount}}</text>
+      </view>
+       <view class='playlist-li'>
+        <image src='{{logo.wd}}'></image>
+        <text>{{detail.info.shareCount}}</text>
+      </view>
+      <view class='playlist-li'>
+        <image src='{{logo.w5}}'></image>
+        <text>{{logo.xz}}</text>
+      </view>
+      <view class='playlist-li'>
+        <image src='{{logo.w7}}'></image>
+        <text>{{logo.dx}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 内容列表 -->
+  <view class='playlist-bottom'>
+    <view class='playlistBotomTop'>
+      <view class='playAll'>
+        <image src='{{logo.playUrl}}'></image>
+        <view class='play-title'>播放全部 <text>(共{{playSong.length}}首)</text></view>
+      </view>
+    </view>
+    <view class='playScroll {{songlist?"":"playscroll-ul-bottom"}}'>
+       <template is="playscroll" data="{{playSong:playSong}}"/> 
+    </view>
+  </view>
+</view>
+<loading class="loading" hidden="{{hidden}}">
+  <text class="loading-font">加载中...</text>
+</loading>
+<!-- 弹框 -->
+<view class='tankuangjianjie' hidden='{{abstractHidden}}' bindtap='guanbi'>
+  <template is="abstract" data="{{abstractArtists:abstractArtists}}"/>
+  <image src='{{abstractArtists.absImgUrl}}' class='jianjieImg'></image>
+</view>
+<!-- 播放 -->
+<!-- 底部播放列表 -->
+<view class='songList' hidden='{{songlist}}'>
+  <template is="musicSong" data="{{musicSong:musicSong,hiddenBf:hiddenBf,hiddenZt:hiddenZt}}"/>
+</view>
