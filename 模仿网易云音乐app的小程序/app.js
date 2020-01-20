@@ -1,5 +1,5 @@
 //app.js
-const backgroundAudioManager = wx.getBackgroundAudioManager()
+const backgroundAudioManager = wx.createInnerAudioContext();
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -45,9 +45,11 @@ App({
     }
       //本地存储播放的音乐
       wx.setStorageSync("musicSong", this.globalData.musicSong);
-      backgroundAudioManager.title = this.globalData.musicSong[0].name;
-      backgroundAudioManager.singer = this.globalData.musicSong[0].author;
-      backgroundAudioManager.coverImgUrl = this.globalData.musicSong[0].imgUrl;
+      backgroundAudioManager.play();
+    console.log(this.globalData.musicSong)
+      // backgroundAudioManager.title = this.globalData.musicSong[0].name;
+      // backgroundAudioManager.singer = this.globalData.musicSong[0].author;
+      // backgroundAudioManager.coverImgUrl = this.globalData.musicSong[0].imgUrl;
       // console.log(typeof this.globalData.onplays)
       if (typeof this.globalData.onplays == "function" && typeof this.globalData.onPalyMusic != "function") {
         this.globalData.onplays();

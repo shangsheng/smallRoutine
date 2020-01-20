@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/fm/index",
     "pages/home/index",
@@ -14,41 +14,50 @@
     "pages/author/authorSpecial",
     "pages/artist/album",
     "pages/abstract/abstractAuthor",
-    "pages/catlistAll/catlistAll"
+    "pages/catlistAll/catlistAll",
+    "pages/mv/mv",
+    "pages/dj/index",
+    "pages/user/index",
+    "pages/video/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#BB2c08",
     "navigationBarTitleText": "Music",
-    "navigationBarTextStyle":"white",
+    "navigationBarTextStyle": "white",
     "backgroundColor": "#fbfbfb"
   },
   "tabBar": {
-    "color":"#aaa",
+    "color": "#aaa",
     "selectedColor": "#fff",
-    "borderStyle": "#333",
+    "borderStyle": "black",
     "backgroundColor": "#212121",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "发现音乐",
-      "iconPath": "images/cm2_btm_icn_discovery.png",
-      "selectedIconPath": "images/cm2_btm_icn_discovery_prs.png"
-    },{
-      "pagePath":"pages/fm/index",
-      "text":"私人Fm",
-      "iconPath":"images/cm2_btm_icn_radio.png",
-      "selectedIconPath":"images/cm2_btm_icn_radio_prs.png"
-    },{
-      "pagePath":"pages/home/index",
-      "text":"我的音乐",
-      "iconPath":"images/cm2_btm_icn_music.png",
-      "selectedIconPath":"images/cm2_btm_icn_music_prs.png"
-    },{
-      "pagePath":"pages/search/index",
-      "text":"账号",
-      "iconPath":"images/cm2_btm_icn_account.png",
-      "selectedIconPath":"images/cm2_btm_icn_account_prs.png"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现音乐",
+        "iconPath": "images/cm2_btm_icn_discovery.png",
+        "selectedIconPath": "images/cm2_btm_icn_discovery_prs.png"
+      },
+      {
+        "pagePath": "pages/fm/index",
+        "text": "私人Fm",
+        "iconPath": "images/cm2_btm_icn_radio.png",
+        "selectedIconPath": "images/cm2_btm_icn_radio_prs.png"
+      },
+      {
+        "pagePath": "pages/home/index",
+        "text": "我的音乐",
+        "iconPath": "images/cm2_btm_icn_music.png",
+        "selectedIconPath": "images/cm2_btm_icn_music_prs.png"
+      },
+      {
+        "pagePath": "pages/search/index",
+        "text": "搜索",
+        "iconPath": "images/soushuo.png",
+        "selectedIconPath": "images/soushuo-account.png"
+      }
+    ]
   },
   "networkTimeout": {
     "request": 10000,
@@ -56,5 +65,6 @@
     "uploadFile": 10000,
     "downloadFile": 10000
   },
-  "debug":true
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
 }

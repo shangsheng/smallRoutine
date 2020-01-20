@@ -1,0 +1,16 @@
+
+<template name="searchSuggest">
+  <view class="searchSuggest">
+    <view class="search-value">搜索‘{{searchValue}}’</view>
+    <view class="suggest-ul" wx:if="serachSuggest" id="suggestBox">
+        <scroll-view scroll-y style="height:{{suggestHeight<windwHeight?suggestHeight:windwHeight}}px">
+          <view class="resultName" wx:for="{{serachSuggest.order}}" wx:for-index="key" wx:for-item="suggest">
+            <view class="suggest-li" wx:for="{{serachSuggest[suggest]}}" wx:for-item="item" data-id="{{item.id}}" data-keyName="{{suggest}}">
+              <image class="suggest-img" src="../../images/soushuo.png"></image>
+              <text>{{item.name}}</text>
+            </view>
+          </view>
+        </scroll-view>
+    </view>
+  </view>
+</template>

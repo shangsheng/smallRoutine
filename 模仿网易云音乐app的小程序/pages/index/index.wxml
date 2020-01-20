@@ -4,7 +4,7 @@
  <swiper indicator-dots="{{indicatorDots}}"
   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class='banner'>
   <block wx:for="{{imgUrls}}">
-    <swiper-item class="banner-item" data-id= "{{item.encodeId}}">
+    <swiper-item class="banner-item" data-id= "{{item.encodeId}}" data-targetType="{{item.targetType}}" data-url="{{item.url}}" bindtap="clickUrl">
       <image src="{{item.pic}}" class="slide-image" width="355" height="150"/>
     </swiper-item>
   </block>
@@ -13,16 +13,25 @@
 <view class='rsp'>
   <view class='rsp-list'>
     <navigator url="../recommend/index">
+      <view class="img-logo img-mr">
+        <image src="../../images/meirituijian.png" class="imgs-l"></image>
+      </view>
       <text>每日推荐</text>
     </navigator>
   </view>
   <view class='rsp-list'>
     <navigator url="../song/index">
+      <view class="img-logo img-mr">
+        <image src="../../images/zuixingedan.png" class="imgs-l"></image>
+      </view>
       <text>歌单</text>
     </navigator>
   </view>
   <view class='rsp-list'>
     <navigator url="../ranking/index">
+      <view class="img-logo img-mr">
+        <image src="../../images/paihangbang.png" class="imgs-l"></image>
+      </view>
       <text>排行榜</text>
     </navigator>
   </view>

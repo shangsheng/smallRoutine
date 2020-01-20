@@ -1,5 +1,5 @@
 <import src="../../comment/lyc.wxml" />
-<view class="musicDisc">
+<view class="musicDisc" style="height:{{windowHeight}}px">
   <view class='musicDisc-top' bindtap='loadlrcTrue'>
     <image src='../../images/aag.png' class='musicDisc-img-l {{ palys ? "plays" : ""}}'></image>
     <view class='discImg'>

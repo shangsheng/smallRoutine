@@ -5,7 +5,7 @@
   <view class='playlistTop'>
     <view class='playlist-rnd-top' data-id="{{detail.id}}" bindtap='abstracts'>
       <view class='palylist-top-img'>
-        <image src='{{detail.picUrl}}' class='imgName'></image>
+        <image src='{{detail.coverImgUrl}}' class='imgName'></image>
         <view class='playlist-number'>
           <image src='{{logo.t}}'></image>
           <text>{{detail.playCount}}</text>
@@ -79,7 +79,7 @@
 </view>
 <!-- 底部播放列表 -->
 <view class='songList' hidden='{{songlist}}'>
-  <template is="musicSong" data="{{musicSong}}"/>
+  <template is="musicSong" data="{{musicSong,hiddenBf,hiddenZt}}"/>
     <!-- <view class='music-div'>
       <view class='music-left'>
         <navigator url='/pages/music/song?id={{musicSong[0].id}}'>

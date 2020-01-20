@@ -15,6 +15,9 @@
   height: 0;
   overflow: hidden;
 }
+.p-fn{
+  position: relative;
+}
 /* 歌手简介 */
 .tankuangjianjie{
   position: fixed;
@@ -330,3 +333,9 @@
 width:100%;z-index: 3;filter: brightness(.1)}
 #lrclist:after{top:auto;bottom:0;transform: rotate(180deg)}
 #lrclist .cntloading{position: absolute;top: 50%;color: #fff;width: 100%; margin-top: -16rpx;}
+.pull-left{
+  float: left;
+}
+.pull-right{
+  float: right;
+}

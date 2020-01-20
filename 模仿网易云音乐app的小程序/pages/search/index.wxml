@@ -1,2 +1,57 @@
 <!--pages/search/index.wxml-->
-<text>pages/search/index.wxml</text>
+<import src="../../comment/searchsuggest.wxml"/>
+<import src="../../comment/searchList.wxml"/>
+<!-- <import src="../../comment/musicList.wxml"> -->
+<view class="search">
+  <view class="search-input">
+    <input class="search-icon" placeholder="许嵩" bindinput="bindKeysuggest" bindblur="blurInput" bindfocus="focusInput" type="text" confirm-type="search" bindconfirm="bindKeySerch" value="{{searchValue}}"></input>
+  </view>
+  <view class="search-historical-record" wx:if="{{searchHistorical.length> 0}}" style="display:{{searchLHidden?'none':'block'}};">
+    <view class="historical-top">
+      <text>历史记录</text>
+      <image src="../../images/fm/cm2_fm_btn_delete9@2x.png" class="search-remove" bindtap="removeHistorical"></image>
+    </view>
+    <view class="historical-bottom">
+      <view class="h-ul clearfix">
+        <view class="h-li" wx:for="{{searchHistorical}}" data-type="1018" data-value="{{item}}" bindtap="bindKeySerch">
+          {{item}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="search-hot-search" style="display:{{searchLHidden?'none':'block'}};">
+    <view class="hotSearch-top">
+      <text>热搜榜</text>
+    </view>
+    <view class="hotSearch-bottom">
+      <view class="hotSearch-ul">
+        <view class="hotSearch-li clearfix" wx:for="{{searchHot}}" data-iconType="{{item.iconType}}">
+         <view  class="{{index<3?'num-color hotSearch-Num':'hotSearch-Num'}}">{{index+1}}</view>
+         <view class="hotSearch-modle">
+            <text class="hot-header">
+              {{item.searchWord}}
+            </text>
+            <image src="{{item.iconUrl}}" class="hot-img" wx:if="{{item.iconUrl}}"></image>
+            <text class="hot-bottom"> {{item.content}}</text>
+         </view>
+         <view class="hotSearch-sj">
+         {{item.score}}
+         </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 搜索建议 -->
+  <view class="searchSuggest-t" style="display:{{suggestHidden ? 'none' : 'block'}};">
+    <template is="searchSuggest" data="{{serachSuggest:serachSuggest,searchValue:searchValue,windwHeight:windwHeight,suggestHeight:suggestHeight}}" ></template>
+  </view>
+  <!-- 搜索结果 -->
+  <view class="searchJg" style="display:{{searchLHidden?'block':'none'}};">
+    <template is="searchList" data="{{searchList:searchList,searchWidth:searchWidth,searchType:searchType,searchTWidth:searchTWidth,serachLeft:serachLeft,searchSongszh:searchSongszh,serachHeight:serachHeight,songsIndex:songsIndex,bindchangeSwiper:bindchangeSwiper,searchSongs:searchSongs,scrolltolower:scrolltolower,tabSearch:tabSearch,searchAlbumzh:searchAlbumzh,searchAlbum:searchAlbum,searchArtistszh:searchArtistszh,searchArtists:searchArtists,currentNumber:currentNumber,searchPlaylistzh:searchPlaylistzh,searchPlaylist:searchPlaylist,searchMvzh:searchMvzh,searchMv:searchMv,searchDjzh:searchDjzh,searchDj:searchDj,searchVideozh:searchVideozh,searchVideo:searchVideo,searchUserzh:searchUserzh,searchUser:searchUser,serachHref:serachHref}}"></template>
+  </view>
+  <!-- <template is="playscroll" data="{{musicSong:musicSong}}"></template> -->
+  <loading class="loading" hidden="{{hidden}}">
+  <text class="loading-font">加载中...</text>
+</loading>
+
+</view>

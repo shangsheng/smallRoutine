@@ -1,4 +1,4 @@
-const _Http = 'http://neteasemusic.leanapp.cn';//路径
+const _Http = 'http://localhost:3000';//路径
 // 手机登录
 const _Phone        = _Http +'/login/cellphone';
 //邮箱登录
@@ -77,11 +77,13 @@ const _topPlaylistHighquality = _Http + '/top/playlist/highquality';
 // 获取歌单详情
 const _playlistDetail = _Http + '/playlist/detail';
 // 获取音乐 url
-const _musicUrl = _Http + '/music/url';
+const _musicUrl = _Http + '/song/url';
 // 搜索
 const _secrch = _Http + '/search';
 //热搜
 const _secrchHot = _Http + '/search/hot';
+//热搜列表(详细)
+const _secrchHotDetail = _Http + '/search/hot/detail';
 //搜索建议
 const _searchSuggest = _Http + '/search/suggest';
 //搜索多重匹配
@@ -238,5 +240,6 @@ module.exports = {
   _mv: _mv,
   _mvUrl: _mvUrl,
   _topList: _topList,
-  _toplistArtist: _toplistArtist
+  _toplistArtist: _toplistArtist,
+  _secrchHotDetail: _secrchHotDetail
 }

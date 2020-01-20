@@ -2,6 +2,7 @@
 .musicDisc{
   padding:10px;
    background-color: rgba(0, 0, 0, 0.2); 
+   position: relative;
 }
 .musicDisc .musicDisc-top{
  position: relative; 
@@ -72,6 +73,10 @@
 }
 .musicDisc .musicDisc-bottom{
   padding-top: 10px;
+  position: absolute;
+  bottom: 7rpx;
+  left: 0;
+  width: 100%;
 }
 .musicDisc .musicDisc-bottom .operate{
   padding: 10px 10px;

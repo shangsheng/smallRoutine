@@ -1,50 +1,75 @@
-module.exports=[{
-            type:1,
-            name:"单曲",
-            relist:[],
-            klass:'songs',
-            offset:0,
-            limit:20
-        },{
-            type:100,
-            name:"歌手",
-            relist:[],
-            klass:'artis',
-            offset:0,
-            limit:20
-        },{
-            type:10,
-            name:"专辑",
-            relist:[],
-            klass:'album',
-            offset:0,
-            limit:20
-        },{
-            type:1000,
-            name:"歌单",
-            relist:[],
-            klass:'playlist',
-            offset:0,
-            limit:20
-        },{
-            type:1004,
-            name:"MV",
-            relist:[],
-            klass:'mv',
-            offset:0,
-            limit:20
-        },{
-            type:1009,
-            name:"主播电台",
-            relist:[],
-            klass:'dj',
-            offset:0,
-            limit:20
-        },{
-            type:1002,
-            name:"用户",
-            relist:[],
-            klass:'user',
-            offset:0,
-            limit:20
-        }]
+function albumUrl(id, callback){
+  wx.navigateTo({
+    url: '/pages/album/album?id='+id,
+    success:function(res){
+      callback(res)
+    },
+  })
+}
+function artisUrl(id, callback) {
+  wx.navigateTo({
+    url: '/pages/artist/album?id=' + id,
+    success: function (res) {
+      callback(res)
+    },
+  })
+}
+function playlistUrl(id, callback) {
+  wx.navigateTo({
+    url: '/pages/playlist/detail?id=' + id,
+    success: function (res) {
+      callback(res)
+    },
+  })
+}
+function mvUrl(id, callback) {
+  wx.navigateTo({
+    url: '/pages/mv/mv?id=' + id,
+    success: function (res) {
+      callback(res)
+    },
+  })
+}
+function djUrl(id, callback) {
+  wx.navigateTo({
+    url: '/pages/dj/index?id=' + id,
+    success: function (res) {
+      callback(res)
+    },
+  })
+}
+function userUrl(id, callback) {
+  wx.navigateTo({
+    url: '/pages/user/index?id=' + id,
+    success: function (res) {
+      callback(res)
+    },
+  })
+}
+function videoUrl(id, callback) {
+  wx.navigateTo({
+    url: '/pages/video/index?id=' + id,
+    success: function (res) {
+      callback(res)
+    },
+  })
+}
+function songsUrl(id, callback) {
+  wx.navigateTo({
+    url: '/pages/music/song?id=' + id,
+    success: function (res) {
+      callback(res)
+    },
+   
+  })
+}
+module.exports={
+  albumUrl: albumUrl,
+  artisUrl: artisUrl,
+  playlistUrl: playlistUrl,
+  mvUrl: mvUrl,
+  djUrl: djUrl,
+  userUrl: userUrl,
+  videoUrl: videoUrl,
+  songsUrl: songsUrl
+}

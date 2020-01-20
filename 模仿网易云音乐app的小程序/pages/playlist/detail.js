@@ -178,7 +178,7 @@ Page({
           }),
           musicSong:res.data.map(function(item){
             
-            item.name = _that.data.playSong[index].name;
+            // item.name = _that.data.playSong[index].name;
             item.author = arName;
             item.imgUrl = _that.data.playSong[index].al.picUrl;
             return item
@@ -198,6 +198,8 @@ Page({
           app.globalData.hiddenBf = _that.data.hiddenBf;
           app.globalData.hiddenZt = _that.data.hiddenZt;
           app.globalData.songIndex = _that.data.songIndex;
+          app.globalData.musicSong = _that.data.musicSong;
+          app.globalData.onplays = _that.onplays;
           app.musicPaly(_that.data.musicSong[0].url);
         }, 300);
       });
@@ -387,6 +389,7 @@ Page({
           app.globalData.hiddenZt = that.data.hiddenZt;
           app.globalData.palys = that.data.palys;
           app.globalData.songIndex = that.data.songIndex;
+          app.globalData.onplays = that.onplays;
           app.musicPaly(that.data.musicSong[0].url);
         }, 300)
       });
@@ -407,6 +410,7 @@ Page({
 */
   onplays: function () {
     var that = this;
+    console.log(app.globalData.backgroundAudioManager)
     app.globalData.backgroundAudioManager.onWaiting(function () {
       that.setData({
         hiddenBf: false,

@@ -1,0 +1,522 @@
+<template name="searchList">
+  <view class="searchList">
+    <view class="searchHeader">
+      <scroll-view scroll-x class="header-ul">
+        <view class="clearfix p-fn" style="width:{{searchWidth}}px;">
+          <view  class="{{item.type === searchType ? 'header-active header-li':'header-li'}}" wx:for="{{searchList}}" data-type="{{item.type}}" data-index="{{index}}" bindtap="tabSearch">{{item.name}}
+          </view>
+          <view class="et-hero-tab-slider" style="width:{{searchTWidth}}px;left:{{serachLeft}}px;"></view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="searchBottom">
+      <swiper class="serach-swiper" style="height:{{serachHeight}}px;" current="{{currentNumber}}" bindchange="bindchangeSwiper">
+      <!-- 综合 -->
+        <swiper-item class="serach-zh" >
+          <scroll-view scroll-y style="height:{{serachHeight}}px;">
+            <view class="serach-songs">
+              <view class="search-header-top">
+                <text class="header-text">单曲</text> |
+                <view class=" songs-playAll" data-type="1" bindtap="serachHref">
+                  <image src="../../images/pl-playall.png" class="play-img"></image>
+                  <text class="play-name">全部播放</text>
+                </view>
+              </view>
+              <view class="search-bottom">
+                <view class="sarch-songs-bottom">
+                  <view  class="scroll-height" >
+                    <view class="songs-ul">
+                      <view class="songs-li clearfix" wx:for="{{searchSongszh}}" wx:for-item="songsItem" wx:for-index="keys">
+                        <view class="pull-left" data-id="{{songsItem.id}}" data-type="1" bindtap="serachHref" data-index="{{keys}}">
+                          <view class="songs-li-top">
+                            <image class="songs-play-img" src="../../images/aal.png" hidden="songsIndex != keys"></image>
+                            <view class="songs-li-name">
+                              <rich-text nodes="{{songsItem.name}}"></rich-text>
+                            </view>
+                          </view>
+                          <view class="songs-li-bottom">
+                            <view class="songs-li-ar" wx:for="{{songsItem.artists}}" wx:for-item="itemAr" wx:for-index="indexAr">
+                              <rich-text nodes="{{itemAr.name}}"></rich-text>
+                              <text wx:if="{{indexAr<songsItem.artists.length-1}}">/</text>
+                            </view> - 
+                            <view class="songs-li-title">
+                              <rich-text nodes="{{songsItem.album.name}}"></rich-text>
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  
+                </view>
+              </view>
+            </view>
+            <view class="search-album">
+              <view class="search-header-top">
+                <text class="header-text">专辑</text>
+              </view>
+              <view class="search-bottom">
+                <view class="search-album-bottom">
+                  <view class="album-ul">
+                    <view class="album-li" wx:for="{{searchAlbumzh}}" wx:for-item="albumItem" data-id="{{albumItem.id}}" data-type="10" bindtap="serachHref">
+                      <view class="album-img">
+                        <image class="album-img-bgc" src="../../images/a6l.png"></image>
+                        <image class="album-img-picUrl" src="{{albumItem.picUrl}}"></image>
+                      </view>
+                      <view class="album-items">
+                        <view class="album-name">
+                          <rich-text nodes="{{albumItem.name}}"></rich-text>
+                        </view>
+                        <view class="album-time">
+                          <block wx:for="{{albumItem.artists}}" wx:for-item="albumAr" wx:for-index="albumIndex">
+                             <rich-text   nodes="{{albumAr.name}}"></rich-text>
+                              {{albumIndex<albumItem.artists.length-1?'/':''}}
+                          </block>
+                          -
+                          <text>{{albumItem.publishTime}}</text>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="search-artist">
+              <view class="search-header-top">
+                <text class="header-text">歌手</text>
+              </view>
+              <view class="search-artist-bottom">
+                <view class="artist-ul">
+                  <view class="artist-li" wx:for="{{searchArtistszh}}" wx:for-item="artistItem">
+                    <view class="artist-img" data-id="{{artistItem.id}}" data-type="100" bindtap="serachHref">
+                      <image src="{{artistItem.img1v1Url}}" class="artist-img-picUrl"></image>
+                    </view>
+                    <view class="artist-r" >
+                      <view class="clearfix">
+                        <view class="pull-left" data-id="{{artistItem.id}}" data-type="100" bindtap="serachHref">
+                          <view class="artist-anme">
+                            <rich-text nodes="{{artistItem.name}}"></rich-text>
+                            <text wx:for="{{artistItem.alias}}" wx:for-item="key" wx:for-index="aliasIndex">({{aliasIndex<artistItem.alias.length-1?key+'/':key}})</text>
+                          </view>
+                        </view>
+                        <view class="pull-right" data-id="{{artistItem.accountId}}" wx:if="{{artistItem.accountId}}">
+                          <image src="../../images/yiruzhi.png" class="artist-rz-img"></image>
+                          <text class="artist-rz">已入驻</text>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="search-playlist">
+              <view class="search-header-top">
+                <text class="header-text">歌单</text>
+              </view>
+              <view class="search-playlist-bottom">
+                <view class="playlist-ul">
+                  <view class="playlist-li" wx:for="{{searchPlaylistzh}}" data-id="{{item.id}}" data-type="1000" bindtap="serachHref">
+                    <view class="playlist-img" >
+                      <image src="{{item.coverImgUrl}}" class="playlist-img-picUrl"></image>
+                    </view>
+                    <view class="playlist-r" >
+                      <view class="playlist-name">
+                        <rich-text nodes="{{item.name}}"></rich-text>
+                      </view>
+                      <view class="playlsit-srb">
+                        {{item.trackCount}}首
+                        by
+                        {{item.creator.nickname}}
+                        ,
+                        播放{{item.playCount}}次
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="search-mv">
+              <view class="search-header-top">
+                <text class="header-text">MV</text>
+              </view>
+              <view class="serch-mv-bottom">
+                <view class="mv-ul">
+                  <view class="mv-li" wx:for="{{searchMvzh}}" data-id="{{item.id}}" data-type="1004" bindtap="serachHref">
+                    <view class="mv-img">
+                      <image src="{{item.cover}}"  class="mv-img-imgUrl"></image>
+                      <view class="mv-playCount">
+                        <image class="count-img" src="../../images/bofang.png"></image>
+                        {{item.playCount}}次
+                      </view>
+                    </view>
+                    <view class="mv-r">
+                      <view class="mv-name">
+                        <image class="img-logo-mv" src="../../images/cm2_list_btn_icn_mv_new@2x.png"></image>
+                        <rich-text nodes="{{item.name}}"></rich-text>
+                      </view>
+                      <view class="mv-tn"> {{item.duration}}  by {{item.artistName}} </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="search-dj">
+              <view class="search-header-top">
+                <text class="header-text">电台</text>
+              </view>
+              <view class="search-dj-bottom">
+                <view class="dj-ul">
+                  <view class="dj-li" wx:for="{{searchDjzh}}" data-id="{{item.id}}" data-type="1009" bindtap="serachHref">
+                    <view class="dj-l">
+                      <image src="{{item.picUrl}}" class="dj-img-imgUrl"></image>
+                     
+                    </view>
+                    <view class="dj-border">
+                      <view class="dj-m">
+                        <view class="dj-name">
+                          <rich-text nodes="{{item.name}}"></rich-text>
+                         
+                        </view>
+                        <view class="dj-title">{{item.dj.nickname}}</view>
+                      </view>
+                     
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="search-mv">
+              <view class="search-header-top">
+                <text class="header-text">视频</text>
+              </view>
+              <view class="serch-mv-bottom">
+                <view class="mv-ul">
+                  <view class="mv-li" wx:for="{{searchVideozh}}" wx:for-item="videoItem" data-id="{{videoItem.vid}}" data-type="1014" bindtap="serachHref">
+                    <view class="mv-img">
+                      <image src="{{videoItem.coverUrl}}"  class="mv-img-imgUrl"></image>
+                      <view class="mv-playCount">
+                        <image class="count-img" src="../../images/bofang.png"></image>
+                        {{videoItem.playTime}}次
+                      </view>
+                    </view>
+                    <view class="mv-r">
+                      <view class="mv-name video-title">
+                        <rich-text nodes="{{videoItem.title}}"></rich-text>
+                      </view>
+                      <view class="mv-tn video-title"> {{videoItem.durationms}}  by 
+                        <block wx:for="{{videoItem.creator}}" wx:for-item="creaItem">
+                          {{videoIndex < videoItem.creator.length-1 ? creaItem.userName + '/' : creaItem.userName}} 
+                        </block>
+                      
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="search-user search-dj">
+              <view class="search-header-top">
+                <text class="header-text">用户</text>
+              </view>
+              <view class="search-user-bottom search-dj-bottom ">
+                <view class="dj-ul">
+                  <view class="dj-li" wx:for="{{searchUserzh}}" data-id="{{item.userId}}" data-type="1002" bindtap="serachHref">
+                    <view class="dj-l">
+                      <image src="{{item.avatarUrl}}" class="dj-img-imgUrl"></image>
+                      <image src="../../images/s_.png" class="dj-img-v"wx:if="{{item.userType != 0}}"></image>
+                      <!-- <image src="../../images/s_.png" class="dj-img-v" v-elif="item.vipType"></image> -->
+                    </view>
+                    <view class="dj-border">
+                      <view class="dj-m">
+                        <view class="dj-name">
+                          <rich-text nodes="{{item.nickname}}"></rich-text>
+                          <image src="../../images/rt.png" class="rt-img" wx:if="{{item.gender == 1}}"></image>
+                          <image src="../../images/s1.png" class="s1-img" wx:elif="{{item.gender == 0}}"></image>
+                        </view>
+                        <view class="dj-title">{{item.signature}}</view>
+                      </view>
+                      <view class="{{item.followed?'dj-gz dj-gz-color':'dj-gz'}}">
+                        <text wx:if="{{!item.followed}}">+</text>
+                        {{item.followed?'已关注':'关注'}}
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+          
+        </swiper-item>
+        <!-- 单曲 -->
+        <swiper-item class="serach-dq">
+          <view class="serach-songs">
+            <view class="search-header-top">
+              <text class="header-text">单曲</text> |
+              <view class=" songs-playAll" data-type="1" bindtap="serachHref">
+                <image src="../../images/pl-playall.png" class="play-img"></image>
+                <text class="play-name">全部播放</text>
+              </view>
+            </view>
+            
+            <view class="search-bottom">
+              <view class="sarch-songs-bottom">
+                <scroll-view scroll-y class="scroll-height" style="height:{{serachHeight-40}}px;" bindscrolltolower="scrolltolower">
+                  <view class="songs-ul">
+                    <view class="songs-li clearfix" wx:for="{{searchSongs}}" wx:for-item="songsItem" wx:for-index="keys">
+                      <view class="pull-left" data-id="{{songsItem.id}}" data-type="1" bindtap="serachHref" data-index="{{keys}}">
+                        <view class="songs-li-top">
+                          <image class="songs-play-img" src="../../images/aal.png" hidden="songsIndex != keys"></image>
+                          <view class="songs-li-name">
+                            <rich-text nodes="{{songsItem.name}}"></rich-text>
+                          </view>
+                        </view>
+                        <view class="songs-li-bottom">
+                          <view class="songs-li-ar" wx:for="{{songsItem.artists}}" wx:for-item="itemAr" wx:for-index="indexAr">
+                            <rich-text nodes="{{itemAr.name}}"></rich-text>
+                            <text wx:if="{{indexAr<songsItem.artists.length-1}}">/</text>
+                          </view> - 
+                          <view class="songs-li-title">
+                            <rich-text nodes="{{songsItem.album.name}}"></rich-text>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </scroll-view>
+                
+              </view>
+            </view>
+          </view>
+        </swiper-item>
+        <!-- 专辑 -->
+        <swiper-item class="search-zj">
+          <view class="search-header-top">
+            <text class="header-text">专辑</text>
+          </view>
+          <view class="search-bottom">
+            <view class="search-album-bottom">
+              <scroll-view scroll-y style="height:{{serachHeight-40}}px;" bindscrolltolower="scrolltolower">
+                <view class="album-ul">
+                  <view class="album-li" wx:for="{{searchAlbum}}" wx:for-item="albumItem" data-id="{{albumItem.id}}" data-type="10" bindtap="serachHref">
+                    <view class="album-img">
+                      <image class="album-img-bgc" src="../../images/a6l.png"></image>
+                      <image class="album-img-picUrl" src="{{albumItem.picUrl}}"></image>
+                    </view>
+                    <view class="album-items">
+                      <view class="album-name">
+                        <rich-text nodes="{{albumItem.name}}"></rich-text>
+                      </view>
+                      <view class="album-time">
+                        <block wx:for="{{albumItem.artists}}" wx:for-item="albumAr" wx:for-index="albumIndex">
+                          <rich-text   nodes="{{albumAr.name}}"></rich-text>
+                            {{albumIndex<albumItem.artists.length-1?'/':''}}
+                        </block>
+                        -
+                        <text>{{albumItem.publishTime}}</text>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </scroll-view>
+              
+            </view>
+          </view>
+        </swiper-item>
+        <!-- 歌手 -->
+        <swiper-item class="search-gs">
+          <view class="search-artist">
+              <view class="search-header-top">
+                <text class="header-text">歌手</text>
+              </view>
+              <view class="search-artist-bottom">
+                <scroll-view scroll-y style="height:{{serachHeight-40}}px;" bindscrolltolower="scrolltolower">
+                  <view class="artist-ul">
+                    <view class="artist-li" wx:for="{{searchArtists}}" wx:for-item="artistItem">
+                      <view class="artist-img" data-id="{{artistItem.id}}" data-type="100" bindtap="serachHref">
+                        <image src="{{artistItem.img1v1Url}}" class="artist-img-picUrl"></image>
+                      </view>
+                      <view class="artist-r" data-id="{{artistItem.id}}" data-type="100">
+                        <view class="clearfix">
+                          <view class="pull-left">
+                            <view class="artist-anme">
+                              <rich-text nodes="{{artistItem.name}}"></rich-text>
+                              <text wx:for="{{artistItem.alias}}" wx:for-item="key" wx:for-index="aliasIndex">({{aliasIndex<artistItem.alias.length-1?key+'/':key}})</text>
+                            </view>
+                          </view>
+                          <view class="pull-right" data-id="{{artistItem.accountId}}" wx:if="{{artistItem.accountId}}">
+                            <image src="../../images/yiruzhi.png" class="artist-rz-img"></image>
+                            <text class="artist-rz">已入驻</text>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </scroll-view>
+                
+              </view>
+            </view>
+        </swiper-item>
+        <!-- 歌单 -->
+        <swiper-item class="search-gd">
+            <view class="search-playlist">
+              <view class="search-header-top">
+                <text class="header-text">歌单</text>
+              </view>
+              <view class="search-playlist-bottom">
+                <scroll-view scroll-y style="height:{{serachHeight-40}}px;" bindscrolltolower="scrolltolower">
+                  <view class="playlist-ul">
+                    <view class="playlist-li" wx:for="{{searchPlaylist}}" data-id="{{item.id}}" data-type="1000" bindtap="serachHref">
+                      <view class="playlist-img" >
+                        <image src="{{item.coverImgUrl}}" class="playlist-img-picUrl"></image>
+                      </view>
+                      <view class="playlist-r" >
+                        <view class="playlist-name">
+                          <rich-text nodes="{{item.name}}"></rich-text>
+                        </view>
+                        <view class="playlsit-srb">
+                          {{item.trackCount}}首
+                          by
+                          {{item.creator.nickname}}
+                          ,
+                          播放{{item.playCount}}次
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </scroll-view>
+              </view>
+            </view>
+        </swiper-item>
+        <!-- mv -->
+        <swiper-item class="search-mv">
+          <view class="search-mv">
+              <view class="search-header-top">
+                <text class="header-text">MV</text>
+              </view>
+              <view class="serch-mv-bottom">
+                <scroll-view scroll-y style="height:{{serachHeight-40}}px;" bindscrolltolower="scrolltolower">
+                  <view class="mv-ul">
+                    <view class="mv-li" wx:for="{{searchMv}}" data-id="{{item.id}}" data-type="1004" bindtap="serachHref">
+                      <view class="mv-img">
+                        <image src="{{item.cover}}"  class="mv-img-imgUrl"></image>
+                        <view class="mv-playCount">
+                          <image class="count-img" src="../../images/bofang.png"></image>
+                          {{item.playCount}}次
+                        </view>
+                      </view>
+                      <view class="mv-r">
+                        <view class="mv-name">
+                          <image class="img-logo-mv" src="../../images/cm2_list_btn_icn_mv_new@2x.png"></image>
+                          <rich-text nodes="{{item.name}}"></rich-text>
+                        </view>
+                        <view class="mv-tn"> {{item.duration}}  by {{item.artistName}} </view>
+                      </view>
+                    </view>
+                  </view>
+                </scroll-view>
+              </view>
+            </view>
+        </swiper-item>
+        <!-- 电台 -->
+        <swiper-item class="search-dt">
+          <view class="search-dj">
+              <view class="search-header-top">
+                <text class="header-text">电台</text>
+              </view>
+              <view class="search-dj-bottom">
+               <scroll-view scroll-y style="height:{{serachHeight-40}}px;" bindscrolltolower="scrolltolower">
+                 <view class="dj-ul">
+                  <view class="dj-li" wx:for="{{searchDj}}" data-id="{{item.id}}" data-type="1009" bindtap="serachHref">
+                    <view class="dj-l">
+                      <image src="{{item.picUrl}}" class="dj-img-imgUrl"></image>
+                     
+                    </view>
+                    <view class="dj-border">
+                      <view class="dj-m">
+                        <view class="dj-name">
+                          <rich-text nodes="{{item.name}}"></rich-text>
+                          
+                        </view>
+                        <view class="dj-title">{{item.dj.nickname}}</view>
+                      </view>
+                     
+                    </view>
+                  </view>
+                </view>
+               </scroll-view>
+              </view>
+            </view>
+        </swiper-item>
+        <!-- 视频 -->
+        <swiper-item class="search-sp">
+          <view class="search-mv">
+              <view class="search-header-top">
+                <text class="header-text">视频</text>
+              </view>
+              <view class="serch-mv-bottom">
+                <scroll-view scroll-y style="height:{{serachHeight-40}}px;" bindscrolltolower="scrolltolower">
+                  <view class="mv-ul">
+                    <view class="mv-li" wx:for="{{searchVideo}}" wx:for-item="videoItem" data-id="{{videoItem.vid}}" data-type="1014" bindtap="serachHref">
+                      <view class="mv-img">
+                        <image src="{{videoItem.coverUrl}}"  class="mv-img-imgUrl"></image>
+                        <view class="mv-playCount">
+                          <image class="count-img" src="../../images/bofang.png"></image>
+                          {{videoItem.playTime}}次
+                        </view>
+                      </view>
+                      <view class="mv-r">
+                        <view class="mv-name video-title">
+                          <rich-text nodes="{{videoItem.title}}"></rich-text>
+                        </view>
+                        <view class="mv-tn video-title"> {{videoItem.durationms}}  by 
+                          <block wx:for="{{videoItem.creator}}" wx:for-item="creaItem">
+                            {{videoIndex < videoItem.creator.length-1 ? creaItem.userName + '/' : creaItem.userName}} 
+                          </block>
+                        
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </scroll-view>
+              </view>
+            </view>
+        </swiper-item>
+        <!-- 用户 -->
+        <swiper-item class="search-yh">
+          <view class="search-user search-dj">
+              <view class="search-header-top">
+                <text class="header-text">用户</text>
+              </view>
+              <view class="search-user-bottom search-dj-bottom ">
+                <scroll-view scroll-y style="height:{{serachHeight-40}}px;" bindscrolltolower="scrolltolower">
+                  <view class="dj-ul">
+                    <view class="dj-li" wx:for="{{searchUser}}" data-id="{{item.userId}}" data-type="1002" bindtap="serachHref">
+                      <view class="dj-l">
+                        <image src="{{item.avatarUrl}}" class="dj-img-imgUrl"></image>
+                        <image src="../../images/s_.png" class="dj-img-v"wx:if="{{item.userType != 0}}"></image>
+                        <!-- <image src="../../images/s_.png" class="dj-img-v" v-elif="item.vipType"></image> -->
+                      </view>
+                      <view class="dj-border">
+                        <view class="dj-m">
+                          <view class="dj-name">
+                            <rich-text nodes="{{item.nickname}}"></rich-text>
+                            <image src="../../images/rt.png" class="rt-img" wx:if="{{item.gender == 1}}"></image>
+                            <image src="../../images/s1.png" class="s1-img" wx:elif="{{item.gender == 0}}"></image>
+                          </view>
+                          <view class="dj-title">{{item.signature}}</view>
+                        </view>
+                        <view class="{{item.followed?'dj-gz dj-gz-color':'dj-gz'}}">
+                          <text wx:if="{{!item.followed}}">+</text>
+                          {{item.followed?'已关注':'关注'}}
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </scroll-view>
+              </view>
+            </view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+</template>
